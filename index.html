@@ -1,0 +1,3702 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AA2 · Mapa de Mix de Evaluación Auténtica | SISE</title>
+
+<!-- WORD -->
+<script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+
+<!-- PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.4/jspdf.plugin.autotable.min.js"></script>
+
+<style>
+:root{
+  --red:#FF0E49;
+  --red-dark:#D9003E;
+  --dark:#241F21;
+  --dark2:#30282B;
+  --wine:#6B1E36;
+  --soft:#FFF1F5;
+  --paper:#F7F4F4;
+  --white:#FFFFFF;
+  --text:#211D1F;
+  --muted:#6E6669;
+  --border:#E3DCDF;
+  --green:#147A53;
+  --green-bg:#ECF8F3;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  padding:22px;
+  background:var(--paper);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible{
+  outline:3px solid rgba(255,14,73,.15);
+  outline-offset:2px;
+}
+
+.app{
+  width:100%;
+  max-width:1220px;
+  margin:auto;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:38px 34px;
+  border-radius:18px;
+  color:#fff;
+  background:
+    linear-gradient(
+      112deg,
+      var(--dark) 0%,
+      #3A2028 58%,
+      #711B38 130%
+    );
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  width:290px;
+  height:290px;
+  right:-90px;
+  top:-120px;
+  border:2px solid rgba(255,255,255,.14);
+  border-radius:50%;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  width:140px;
+  height:14px;
+  right:36px;
+  bottom:30px;
+  background:var(--red);
+  transform:skewX(-28deg);
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:980px;
+}
+
+.badge{
+  display:inline-block;
+  margin-bottom:14px;
+  padding:8px 14px;
+  border-radius:6px;
+  background:var(--red);
+  color:#fff;
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+.hero h1{
+  margin:0 0 12px;
+  max-width:980px;
+  color:#fff;
+  font-size:clamp(38px,6vw,60px);
+  line-height:.96;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.hero h1 span{
+  color:var(--red);
+}
+
+.hero p{
+  max-width:900px;
+  margin:0;
+  color:#F7EBEF;
+  font-size:17px;
+  line-height:1.6;
+}
+
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:18px;
+}
+
+.meta span{
+  display:inline-flex;
+  align-items:center;
+  padding:7px 11px;
+  border:1px solid rgba(255,255,255,.20);
+  border-radius:999px;
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  font-size:13px;
+  font-weight:700;
+}
+
+/* =====================================================
+   PROPÓSITO
+===================================================== */
+
+.purpose{
+  margin:18px 0;
+  padding:19px 20px;
+  border:1px solid #F4CBD8;
+  border-left:6px solid var(--red);
+  border-radius:10px;
+  background:var(--soft);
+}
+
+.purpose strong{
+  display:block;
+  margin-bottom:5px;
+  color:var(--red);
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.purpose p{
+  margin:0;
+  color:#4B4346;
+  font-size:14px;
+  line-height:1.65;
+}
+
+/* =====================================================
+   PROGRESO GENERAL
+===================================================== */
+
+.progress-shell{
+  margin-bottom:18px;
+  padding:16px 18px;
+  border-radius:11px;
+  background:var(--dark);
+  color:#fff;
+}
+
+.progress-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:9px;
+  color:#E5DCDF;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.progress-track{
+  height:8px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#5B5255;
+}
+
+.progress-fill{
+  display:block;
+  width:10%;
+  height:100%;
+  border-radius:999px;
+  background:var(--red);
+  transition:.25s ease;
+}
+
+/* =====================================================
+   PANTALLAS
+===================================================== */
+
+.screen{
+  display:none;
+}
+
+.screen.active{
+  display:block;
+  animation:fade .22s ease;
+}
+
+@keyframes fade{
+  from{
+    opacity:.35;
+    transform:translateY(5px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+/* =====================================================
+   SECCIONES
+===================================================== */
+
+.section{
+  margin-bottom:18px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#fff;
+}
+
+.section-head{
+  position:relative;
+  overflow:hidden;
+  padding:20px 24px;
+  background:var(--dark);
+  color:#fff;
+}
+
+.section-head::after{
+  content:"»";
+  position:absolute;
+  right:22px;
+  top:-20px;
+  color:rgba(255,14,73,.18);
+  font-size:100px;
+  font-weight:900;
+}
+
+.section-head small{
+  position:relative;
+  z-index:2;
+  display:block;
+  margin-bottom:5px;
+  color:#FFB1C7;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+
+.section-head h2{
+  position:relative;
+  z-index:2;
+  max-width:980px;
+  margin:0;
+  color:#fff;
+  font-size:clamp(25px,4vw,34px);
+  line-height:1.05;
+}
+
+.section-head p{
+  position:relative;
+  z-index:2;
+  max-width:960px;
+  margin:8px 0 0;
+  color:#EAE1E4;
+  font-size:14px;
+  line-height:1.55;
+}
+
+.section-body{
+  padding:22px;
+}
+
+/* =====================================================
+   CAMPOS
+===================================================== */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:13px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+.field label{
+  color:var(--dark);
+  font-size:13px;
+  font-weight:900;
+}
+
+.field small{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.45;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  border:1px solid #D5CED1;
+  border-radius:8px;
+  padding:11px 12px;
+  background:#fff;
+  color:var(--text);
+}
+
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:var(--red);
+  outline:3px solid rgba(255,14,73,.08);
+}
+
+/* =====================================================
+   ORIENTACIÓN
+===================================================== */
+
+.orientation{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.orientation-card{
+  padding:18px;
+  border:1px solid var(--border);
+  border-top:5px solid var(--red);
+  border-radius:10px;
+  background:#fff;
+}
+
+.orientation-card h3{
+  margin:0 0 7px;
+  color:var(--red);
+  font-size:19px;
+}
+
+.orientation-card p{
+  margin:0;
+  color:#514A4C;
+  font-size:14px;
+  line-height:1.55;
+}
+
+.product-box{
+  margin-top:12px;
+  padding:16px;
+  border-left:5px solid var(--red);
+  border-radius:9px;
+  background:var(--soft);
+  color:#4C4447;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.product-box strong{
+  color:var(--red);
+}
+
+/* =====================================================
+   COMPONENTES
+===================================================== */
+
+.component-list{
+  display:grid;
+  gap:10px;
+}
+
+.component{
+  display:grid;
+  grid-template-columns:270px 1fr;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:9px;
+}
+
+.component-label{
+  padding:14px;
+  background:#F5F2F3;
+  color:var(--dark);
+  font-size:14px;
+  font-weight:900;
+}
+
+.component-content{
+  padding:10px;
+}
+
+.component-content small{
+  display:block;
+  margin-bottom:7px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.45;
+}
+
+/* =====================================================
+   NOTAS
+===================================================== */
+
+.matrix-note{
+  margin:0 0 14px;
+  padding:14px 16px;
+  border-left:5px solid var(--red);
+  border-radius:8px;
+  background:var(--soft);
+  color:#51494C;
+  font-size:13.5px;
+  line-height:1.6;
+}
+
+.matrix-note strong{
+  color:var(--red);
+}
+
+/* =====================================================
+   TABLAS
+===================================================== */
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  min-width:900px;
+  border-collapse:collapse;
+  table-layout:fixed;
+}
+
+th{
+  padding:10px 8px;
+  border:1px solid #fff;
+  background:var(--red);
+  color:#fff;
+  font-size:12px;
+  font-weight:900;
+  line-height:1.3;
+  text-align:center;
+  vertical-align:middle;
+}
+
+td{
+  padding:9px;
+  border:1px solid var(--border);
+  background:#fff;
+  vertical-align:top;
+  color:#40393C;
+  font-size:12.5px;
+  line-height:1.45;
+}
+
+td:first-child{
+  background:#FAF8F9;
+  color:var(--dark);
+  font-weight:800;
+}
+
+td textarea{
+  min-height:82px;
+  margin-top:7px;
+  padding:8px;
+  font-size:12px;
+}
+
+.check-cell{
+  text-align:center;
+}
+
+.check-cell input{
+  width:20px;
+  height:20px;
+  accent-color:var(--red);
+}
+
+/* =====================================================
+   FUENTES
+===================================================== */
+
+.sources{
+  margin:0;
+  padding-left:22px;
+}
+
+.sources li{
+  margin:10px 0;
+  color:#464043;
+  font-size:14px;
+  line-height:1.6;
+}
+
+/* =====================================================
+   BOTONES
+===================================================== */
+
+.navigation{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.navigation-right{
+  display:flex;
+  gap:10px;
+  margin-left:auto;
+}
+
+.btn{
+  min-height:44px;
+  border:0;
+  border-radius:8px;
+  padding:11px 18px;
+  background:var(--red);
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.btn:hover{
+  background:var(--red-dark);
+}
+
+.btn.dark{
+  background:var(--dark);
+}
+
+.btn.dark:hover{
+  background:#3B3336;
+}
+
+.btn.secondary{
+  border:1px solid var(--dark);
+  background:#fff;
+  color:var(--dark);
+}
+
+.btn.secondary:hover{
+  background:var(--dark);
+  color:#fff;
+}
+
+/* =====================================================
+   FINAL
+===================================================== */
+
+.final-card{
+  margin-top:18px;
+  padding:22px;
+  border:1px solid #F4CBD8;
+  border-radius:12px;
+  background:var(--soft);
+}
+
+.final-card h3{
+  margin:0 0 6px;
+  color:var(--dark);
+  font-size:22px;
+}
+
+.final-card p{
+  margin:0;
+  color:#51494B;
+  font-size:14px;
+  line-height:1.55;
+}
+
+.status{
+  display:none;
+  margin-top:12px;
+  padding:12px;
+  border-radius:8px;
+  background:var(--green-bg);
+  color:var(--green);
+  font-size:13px;
+  font-weight:800;
+}
+
+.status.show{
+  display:block;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:850px){
+
+  .grid,
+  .orientation{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .component{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:650px){
+
+  body{
+    padding:12px;
+  }
+
+  .hero{
+    padding:27px 21px;
+  }
+
+  .section-body{
+    padding:16px;
+  }
+
+  .navigation,
+  .navigation-right{
+    width:100%;
+    flex-direction:column;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+}
+
+@media print{
+
+  .progress-shell,
+  .navigation,
+  .final-card{
+    display:none !important;
+  }
+
+  .screen{
+    display:block !important;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="badge">
+      FORMATO DE EVIDENCIA DE APRENDIZAJE · AA2
+    </div>
+
+    <h1>
+      Mapa de Mix de Evaluación para el Diseño de una
+      <span>Evaluación Auténtica</span>
+    </h1>
+
+    <p>
+      Curso: Diseño de Evaluaciones Auténticas y por Competencias.
+    </p>
+
+    <div class="meta">
+      <span>AA2</span>
+      <span>⏱ 60 minutos</span>
+      <span>Diseño de evaluación auténtica</span>
+      <span>Descarga Word y PDF</span>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PROPÓSITO
+===================================================== -->
+
+<div class="purpose">
+
+  <strong>
+    Propósito de AA2
+  </strong>
+
+  <p>
+    Diseñar un mapa de mix de evaluación que articule resultado de aprendizaje,
+    reto auténtico, evidencias, criterios preliminares, tipos de evaluación,
+    técnicas, instrumentos, retroalimentación y uso responsable de IA y TIC.
+    Este formato convierte el diagnóstico AA1 en una propuesta de evaluación
+    auténtica aplicable a un curso real.
+  </p>
+
+</div>
+
+<!-- =====================================================
+     PROGRESO
+===================================================== -->
+
+<div class="progress-shell">
+
+  <div class="progress-top">
+
+    <span>
+      Avance de AA2
+    </span>
+
+    <span id="stepText">
+      Etapa 1 de 10
+    </span>
+
+  </div>
+
+  <div class="progress-track">
+    <span
+      class="progress-fill"
+      id="progressFill">
+    </span>
+  </div>
+
+</div>
+
+<!-- =====================================================
+     PANTALLA 1
+     SECCIONES 1 Y 2
+===================================================== -->
+
+<div class="screen active">
+
+<section class="section">
+
+  <div class="section-head">
+
+    <small>
+      1
+    </small>
+
+    <h2>
+      Datos generales del participante y del curso
+    </h2>
+
+  </div>
+
+  <div class="section-body">
+
+    <div class="grid">
+
+      <div class="field">
+
+        <label>
+          Docente participante
+        </label>
+
+        <input
+          id="docente"
+          type="text"
+          placeholder="Completar aquí">
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          SISE carreras / SISE formación continua
+        </label>
+
+        <input
+          id="unidadNegocio"
+          type="text"
+          placeholder="Completar aquí">
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Curso que rediseña
+        </label>
+
+        <input
+          id="curso"
+          type="text"
+          placeholder="Completar aquí">
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Programa / carrera
+        </label>
+
+        <input
+          id="programa"
+          type="text"
+          placeholder="Completar aquí">
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Unidad o sesión del curso
+        </label>
+
+        <input
+          id="unidadCurso"
+          type="text"
+          placeholder="Completar aquí">
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Fecha de entrega
+        </label>
+
+        <input
+          id="fecha"
+          type="date">
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Evidencia diagnosticada en AA1
+        </label>
+
+        <textarea
+          id="evidenciaAA1"
+          placeholder="Completar aquí"></textarea>
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Código de evidencia
+        </label>
+
+        <input
+          id="codigo"
+          type="text"
+          value="AA2"
+          readonly>
+
+      </div>
+
+      <div class="field full">
+
+        <label>
+          Resultado de aprendizaje del curso
+        </label>
+
+        <textarea
+          id="resultadoCurso"
+          placeholder="Completar aquí"></textarea>
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Modalidad de aplicación
+        </label>
+
+        <select id="modalidad">
+
+          <option value="">
+            Seleccionar
+          </option>
+
+          <option>
+            Presencial
+          </option>
+
+          <option>
+            Virtual
+          </option>
+
+          <option>
+            Híbrida
+          </option>
+
+        </select>
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Herramientas IA/TIC previstas
+        </label>
+
+        <textarea
+          id="herramientasPrevistas"
+          placeholder="Completar aquí"></textarea>
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Producto final esperado
+        </label>
+
+        <input
+          id="productoEsperado"
+          type="text"
+          value="Mapa de mix de evaluación auténtica">
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section">
+
+  <div class="section-head">
+
+    <small>
+      2
+    </small>
+
+    <h2>
+      Orientación pedagógica del formato
+    </h2>
+
+  </div>
+
+  <div class="section-body">
+
+    <div class="orientation">
+
+      <article class="orientation-card">
+
+        <h3>
+          Diseño inverso
+        </h3>
+
+        <p>
+          Parte del resultado esperado y pregunta:
+          ¿qué evidencia es suficiente para demostrar el aprendizaje?
+          Luego define experiencias y actividades que preparen al
+          estudiante para producir esa evidencia.
+        </p>
+
+      </article>
+
+      <article class="orientation-card">
+
+        <h3>
+          Mix de evaluación
+        </h3>
+
+        <p>
+          Combina tipos de evaluación según propósito, actor,
+          temporalidad y método para acompañar el proceso,
+          recoger evidencias parciales y valorar la evidencia
+          principal con criterios claros.
+        </p>
+
+      </article>
+
+      <article class="orientation-card">
+
+        <h3>
+          IA y TIC responsables
+        </h3>
+
+        <p>
+          Usa IA y TIC como apoyo pedagógico para idear,
+          organizar, revisar y mejorar criterios, consignas
+          o instrumentos. La decisión final y la validación
+          corresponden al docente.
+        </p>
+
+      </article>
+
+    </div>
+
+    <div class="product-box">
+
+      <strong>
+        Producto a entregar.
+      </strong>
+
+      Un mapa completo que muestre la coherencia entre resultado,
+      reto, evidencias, criterios, tipo de tarea auténtica, técnica,
+      instrumento, momento, actor evaluador, método,
+      retroalimentación y apoyo de IA/TIC. Debe evidenciar que
+      la evaluación se orienta a la mejora del aprendizaje y no
+      solo a la calificación.
+
+    </div>
+
+    <div class="navigation">
+
+      <span></span>
+
+      <button
+        class="btn"
+        onclick="goScreen(1)">
+        Continuar al paso 3 →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+<!-- =====================================================
+     PANTALLA 2
+     SECCIÓN 3
+===================================================== -->
+
+<div class="screen">
+
+<section class="section">
+
+  <div class="section-head">
+
+    <small>
+      3 · Paso 1
+    </small>
+
+    <h2>
+      Diseño inverso - resultado, desempeño y reto
+    </h2>
+
+  </div>
+
+  <div class="section-body">
+
+    <div class="component-list">
+
+      <div class="component">
+
+        <div class="component-label">
+          Resultado de aprendizaje priorizado
+        </div>
+
+        <div class="component-content">
+
+          <small>
+            Redacte el resultado que será evaluado. Debe indicar
+            qué hará el estudiante, con qué contenido y bajo qué condición.
+          </small>
+
+          <textarea
+            id="p1_resultado"
+            placeholder="Completar aquí"></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="component">
+
+        <div class="component-label">
+          Competencia o capacidad vinculada
+        </div>
+
+        <div class="component-content">
+
+          <small>
+            Indique la competencia, capacidad o desempeño
+            institucional/curricular asociado.
+          </small>
+
+          <textarea
+            id="p1_competencia"
+            placeholder="Completar aquí"></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="component">
+
+        <div class="component-label">
+          Problema de desempeño detectado en AA1
+        </div>
+
+        <div class="component-content">
+
+          <small>
+            Describa la brecha principal:
+            ¿qué no logran demostrar aún los estudiantes
+            con la evidencia actual?
+          </small>
+
+          <textarea
+            id="p1_problema"
+            placeholder="Completar aquí"></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="component">
+
+        <div class="component-label">
+          Meta de desempeño
+        </div>
+
+        <div class="component-content">
+
+          <small>
+            Formule qué deben ser capaces de hacer mejor los
+            estudiantes al finalizar la experiencia.
+          </small>
+
+          <textarea
+            id="p1_meta"
+            placeholder="Completar aquí"></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="component">
+
+        <div class="component-label">
+          Reto auténtico
+        </div>
+
+        <div class="component-content">
+
+          <small>
+            Plantee una situación retadora, contextualizada
+            y cercana al campo laboral o académico del estudiante.
+          </small>
+
+          <textarea
+            id="p1_reto"
+            placeholder="Completar aquí"></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="component">
+
+        <div class="component-label">
+          Rol del estudiante
+        </div>
+
+        <div class="component-content">
+
+          <small>
+            Ejemplo: asesor, analista, diseñador, técnico,
+            consultor, gestor, emprendedor, investigador.
+          </small>
+
+          <textarea
+            id="p1_rol"
+            placeholder="Completar aquí"></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="component">
+
+        <div class="component-label">
+          Audiencia o destinatario
+        </div>
+
+        <div class="component-content">
+
+          <small>
+            Indique quién recibirá, usará o valorará la evidencia:
+            cliente, jurado, equipo, usuario, comunidad, docente, pares.
+          </small>
+
+          <textarea
+            id="p1_audiencia"
+            placeholder="Completar aquí"></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="component">
+
+        <div class="component-label">
+          Condiciones de desempeño
+        </div>
+
+        <div class="component-content">
+
+          <small>
+            Indique recursos, tiempo, restricciones, criterios
+            de calidad, modalidad, trabajo individual o colaborativo.
+          </small>
+
+          <textarea
+            id="p1_condiciones"
+            placeholder="Completar aquí"></textarea>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="navigation">
+
+      <button
+        class="btn secondary"
+        onclick="goScreen(0)">
+        ← Anterior
+      </button>
+
+      <button
+        class="btn"
+        onclick="goScreen(2)">
+        Continuar al paso 4 →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+<!-- =====================================================
+     PANTALLA 3
+     SECCIÓN 4
+===================================================== -->
+
+<div class="screen">
+
+<section class="section">
+
+  <div class="section-head">
+
+    <small>
+      4 · Paso 2
+    </small>
+
+    <h2>
+      Evidencias de aprendizaje suficientes
+    </h2>
+
+  </div>
+
+  <div class="section-body">
+
+    <div class="matrix-note">
+
+      <strong>
+        Criterio de suficiencia.
+      </strong>
+
+      La evidencia principal debe permitir observar el desempeño completo.
+      Las evidencias secundarias deben funcionar como entrenamiento,
+      avance, monitoreo o soporte para llegar a la evidencia principal.
+
+    </div>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Tipo de evidencia</th>
+            <th>Producto o desempeño</th>
+            <th>Qué demuestra</th>
+            <th>Momento de uso</th>
+            <th>Relación con el reto</th>
+            <th>Retroalimentación prevista</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="evidenceBody"></tbody>
+
+      </table>
+
+    </div>
+
+    <div class="navigation">
+
+      <button
+        class="btn secondary"
+        onclick="goScreen(1)">
+        ← Anterior
+      </button>
+
+      <button
+        class="btn"
+        onclick="goScreen(3)">
+        Continuar al paso 5 →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+<!-- =====================================================
+     PANTALLA 4
+     SECCIÓN 5
+===================================================== -->
+
+<div class="screen">
+
+<section class="section">
+
+  <div class="section-head">
+
+    <small>
+      5 · Paso 3
+    </small>
+
+    <h2>
+      Matriz de consistencia entre criterios y evidencias
+    </h2>
+
+  </div>
+
+  <div class="section-body">
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Criterio preliminar</th>
+            <th>Evidencia principal</th>
+            <th>Evidencia secundaria 1</th>
+            <th>Evidencia secundaria 2</th>
+            <th>Evidencia secundaria 3</th>
+            <th>Observación</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="criteriaBody"></tbody>
+
+      </table>
+
+    </div>
+
+    <div class="navigation">
+
+      <button
+        class="btn secondary"
+        onclick="goScreen(2)">
+        ← Anterior
+      </button>
+
+      <button
+        class="btn"
+        onclick="goScreen(4)">
+        Continuar al paso 6 →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+<!-- =====================================================
+     PANTALLA 5
+     SECCIÓN 6
+===================================================== -->
+
+<div class="screen">
+
+<section class="section">
+
+  <div class="section-head">
+
+    <small>
+      6 · Paso 4
+    </small>
+
+    <h2>
+      Mapa de Mix de Evaluación
+    </h2>
+
+    <p>
+      Ubique las evidencias a lo largo de la secuencia de aprendizaje.
+      En cada momento, combine los tipos de evaluación según propósito,
+      actor, temporalidad y método. Luego seleccione la tarea auténtica,
+      técnica, instrumento, apoyo TIC/IA y retroalimentación.
+    </p>
+
+  </div>
+
+  <div class="section-body">
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Momento / sesión</th>
+            <th>Evidencia o hito</th>
+            <th>Tipo de tarea auténtica</th>
+            <th>Mix de evaluación</th>
+            <th>Técnica</th>
+            <th>Instrumento / recurso</th>
+            <th>IA o TIC de apoyo</th>
+            <th>Retroalimentación y decisión pedagógica</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="mixBody"></tbody>
+
+      </table>
+
+    </div>
+
+    <div class="navigation">
+
+      <button
+        class="btn secondary"
+        onclick="goScreen(3)">
+        ← Anterior
+      </button>
+
+      <button
+        class="btn"
+        onclick="goScreen(5)">
+        Continuar al paso 7 →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+<!-- =====================================================
+     PANTALLA 6
+     SECCIÓN 7
+===================================================== -->
+
+<div class="screen">
+
+<section class="section">
+
+  <div class="section-head">
+
+    <small>
+      7 · Paso 5
+    </small>
+
+    <h2>
+      Integración responsable de IA y TIC
+    </h2>
+
+  </div>
+
+  <div class="section-body">
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Herramienta</th>
+            <th>Uso pedagógico</th>
+            <th>Prompt o instrucción usada</th>
+            <th>Validación docente</th>
+            <th>Riesgo ético y control</th>
+            <th>Evidencia de uso</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="iaBody"></tbody>
+
+      </table>
+
+    </div>
+
+    <div class="navigation">
+
+      <button
+        class="btn secondary"
+        onclick="goScreen(4)">
+        ← Anterior
+      </button>
+
+      <button
+        class="btn"
+        onclick="goScreen(6)">
+        Continuar al paso 8 →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+<!-- =====================================================
+     PANTALLA 7
+     SECCIÓN 8
+===================================================== -->
+
+<div class="screen">
+
+<section class="section">
+
+  <div class="section-head">
+
+    <small>
+      8 · Paso 6
+    </small>
+
+    <h2>
+      Plan de retroalimentación y decisiones
+    </h2>
+
+  </div>
+
+  <div class="section-body">
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Momento</th>
+            <th>Qué se retroalimenta</th>
+            <th>Quién retroalimenta</th>
+            <th>Cómo se entrega</th>
+            <th>Decisión o acción posterior</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="feedbackBody"></tbody>
+
+      </table>
+
+    </div>
+
+    <div class="navigation">
+
+      <button
+        class="btn secondary"
+        onclick="goScreen(5)">
+        ← Anterior
+      </button>
+
+      <button
+        class="btn"
+        onclick="goScreen(7)">
+        Continuar a la síntesis →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+<!-- =====================================================
+     PANTALLA 8
+     SECCIÓN 9
+===================================================== -->
+
+<div class="screen">
+
+<section class="section">
+
+  <div class="section-head">
+
+    <small>
+      9
+    </small>
+
+    <h2>
+      Síntesis final del diseño AA2
+    </h2>
+
+  </div>
+
+  <div class="section-body">
+
+    <div class="component-list">
+
+      <div class="component">
+
+        <div class="component-label">
+          ¿Qué cambia respecto a la evidencia diagnosticada en AA1?
+        </div>
+
+        <div class="component-content">
+
+          <textarea
+            id="sintesis1"
+            placeholder="Completar aquí"></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="component">
+
+        <div class="component-label">
+          ¿Por qué el nuevo diseño es más auténtico?
+        </div>
+
+        <div class="component-content">
+
+          <textarea
+            id="sintesis2"
+            placeholder="Completar aquí"></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="component">
+
+        <div class="component-label">
+          ¿Cómo se equilibra evaluación diagnóstica, formativa,
+          sumativa y como aprendizaje?
+        </div>
+
+        <div class="component-content">
+
+          <textarea
+            id="sintesis3"
+            placeholder="Completar aquí"></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="component">
+
+        <div class="component-label">
+          ¿Qué decisiones pedagógicas se tomarán con los resultados?
+        </div>
+
+        <div class="component-content">
+
+          <textarea
+            id="sintesis4"
+            placeholder="Completar aquí"></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="component">
+
+        <div class="component-label">
+          ¿Qué cuidados éticos se aplicarán en el uso de IA/TIC?
+        </div>
+
+        <div class="component-content">
+
+          <textarea
+            id="sintesis5"
+            placeholder="Completar aquí"></textarea>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="navigation">
+
+      <button
+        class="btn secondary"
+        onclick="goScreen(6)">
+        ← Anterior
+      </button>
+
+      <button
+        class="btn"
+        onclick="goScreen(8)">
+        Continuar →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+<!-- =====================================================
+     PANTALLA 9
+     SECCIÓN 13
+===================================================== -->
+
+<div class="screen">
+
+<section class="section">
+
+  <div class="section-head">
+
+    <small>
+      13
+    </small>
+
+    <h2>
+      Declaración breve de uso de IA en AA2
+    </h2>
+
+  </div>
+
+  <div class="section-body">
+
+    <div class="component-list">
+
+      <div class="component">
+
+        <div class="component-label">
+          Herramientas utilizadas
+        </div>
+
+        <div class="component-content">
+
+          <textarea
+            id="iaDeclaracionHerramientas"
+            placeholder='Nombre de la herramienta o indicar "No utilicé IA".'></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="component">
+
+        <div class="component-label">
+          Propósito del uso
+        </div>
+
+        <div class="component-content">
+
+          <textarea
+            id="iaDeclaracionProposito"
+            placeholder="Ideación, revisión de redacción, mejora de criterios, generación de alternativas, etc."></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="component">
+
+        <div class="component-label">
+          Prompts o instrucciones
+        </div>
+
+        <div class="component-content">
+
+          <textarea
+            id="iaDeclaracionPrompts"
+            placeholder="Adjuntar o copiar los prompts principales utilizados."></textarea>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="navigation">
+
+      <button
+        class="btn secondary"
+        onclick="goScreen(7)">
+        ← Anterior
+      </button>
+
+      <button
+        class="btn"
+        onclick="goScreen(9)">
+        Continuar a fuentes →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+<!-- =====================================================
+     PANTALLA 10
+     SECCIÓN 14
+===================================================== -->
+
+<div class="screen">
+
+<section class="section">
+
+  <div class="section-head">
+
+    <small>
+      14
+    </small>
+
+    <h2>
+      Fuentes de apoyo para el formato
+    </h2>
+
+  </div>
+
+  <div class="section-body">
+
+    <ul class="sources">
+
+      <li>
+        Material M1-S2 y 3: Estrategia de evaluación.
+        Diseño inverso, definición de evidencias, tareas auténticas,
+        técnicas e instrumentos.
+      </li>
+
+      <li>
+        Trabajo Final: Kit de Evaluación del Curso.
+        Ejemplo de articulación entre evidencia, tipo de tarea,
+        técnica, instrumento y tipo de evaluación.
+      </li>
+
+      <li>
+        Lineamiento SISE de uso de Inteligencia Artificial
+        para docentes y estudiantes. Principios de transparencia,
+        veracidad, privacidad, responsabilidad y supervisión humana.
+      </li>
+
+    </ul>
+
+    <div class="final-card">
+
+      <h3>
+        Descarga tu evidencia AA2
+      </h3>
+
+      <p>
+        Al finalizar puedes descargar tu Mapa de Mix de Evaluación
+        Auténtica en Word editable o PDF.
+      </p>
+
+      <div class="navigation">
+
+        <button
+          class="btn secondary"
+          onclick="goScreen(8)">
+          ← Anterior
+        </button>
+
+        <div class="navigation-right">
+
+          <button
+            class="btn secondary"
+            onclick="resetForm()">
+            Reiniciar
+          </button>
+
+          <button
+            class="btn dark"
+            onclick="downloadWord()">
+            Descargar Word
+          </button>
+
+          <button
+            class="btn"
+            onclick="downloadPDF()">
+            Descargar PDF
+          </button>
+
+        </div>
+
+      </div>
+
+      <div
+        class="status"
+        id="status">
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+</div>
+
+<script>
+
+/* =====================================================
+   PANTALLAS
+===================================================== */
+
+const screens =
+  [...document.querySelectorAll(".screen")];
+
+function goScreen(index){
+
+  screens.forEach((screen,i)=>{
+    screen.classList.toggle(
+      "active",
+      i === index
+    );
+  });
+
+  const percentage =
+    ((index + 1) / screens.length) * 100;
+
+  document
+    .getElementById("progressFill")
+    .style.width =
+      percentage + "%";
+
+  document
+    .getElementById("stepText")
+    .textContent =
+      `Etapa ${index + 1} de ${screens.length}`;
+
+  saveState();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+/* =====================================================
+   EVIDENCIAS
+===================================================== */
+
+const evidenceRows = [
+
+  {
+    id:"evp",
+    tipo:"Evidencia principal",
+    producto:"Producto o desempeño integrador.",
+    demuestra:"Desempeño completo vinculado al resultado.",
+    momento:"Cierre o hito central.",
+    relacion:"Alta relación con situación auténtica.",
+    feedback:"Retroalimentación final + orientación prospectiva."
+  },
+
+  {
+    id:"ev1",
+    tipo:"Evidencia secundaria 1",
+    producto:"Avance, insumo o práctica.",
+    demuestra:"Comprensión inicial o prerrequisito.",
+    momento:"Inicio / proceso.",
+    relacion:"Prepara parte del reto.",
+    feedback:"Feedback formativo."
+  },
+
+  {
+    id:"ev2",
+    tipo:"Evidencia secundaria 2",
+    producto:"Avance, análisis o borrador.",
+    demuestra:"Aplicación o toma de decisiones.",
+    momento:"Proceso.",
+    relacion:"Apoya construcción de evidencia final.",
+    feedback:"Coevaluación o retroalimentación docente."
+  },
+
+  {
+    id:"ev3",
+    tipo:"Evidencia secundaria 3",
+    producto:"Revisión, ensayo o autoevaluación.",
+    demuestra:"Mejora y autorregulación.",
+    momento:"Antes de la entrega final.",
+    relacion:"Optimiza la evidencia principal.",
+    feedback:"Autoevaluación y ajustes."
+  }
+
+];
+
+function renderEvidence(){
+
+  document.getElementById(
+    "evidenceBody"
+  ).innerHTML =
+    evidenceRows.map(row=>`
+
+      <tr>
+
+        <td>
+          ${row.tipo}
+        </td>
+
+        <td>
+          ${row.producto}
+
+          <textarea
+            id="${row.id}_producto"
+            placeholder="Completar aquí"></textarea>
+        </td>
+
+        <td>
+          ${row.demuestra}
+
+          <textarea
+            id="${row.id}_demuestra"
+            placeholder="Completar aquí"></textarea>
+        </td>
+
+        <td>
+          ${row.momento}
+
+          <textarea
+            id="${row.id}_momento"
+            placeholder="Completar aquí"></textarea>
+        </td>
+
+        <td>
+          ${row.relacion}
+
+          <textarea
+            id="${row.id}_relacion"
+            placeholder="Completar aquí"></textarea>
+        </td>
+
+        <td>
+          ${row.feedback}
+
+          <textarea
+            id="${row.id}_feedback"
+            placeholder="Completar aquí"></textarea>
+        </td>
+
+      </tr>
+
+    `).join("");
+
+}
+
+/* =====================================================
+   CRITERIOS
+===================================================== */
+
+function renderCriteria(){
+
+  let html = "";
+
+  for(let i=1;i<=6;i++){
+
+    html += `
+
+      <tr>
+
+        <td>
+
+          Criterio ${i}${i === 6 ? " (opcional)" : ""}
+
+          <textarea
+            id="criterio_${i}"
+            placeholder="Completar criterio observable"></textarea>
+
+        </td>
+
+        <td class="check-cell">
+          <input
+            id="criterio_${i}_principal"
+            type="checkbox">
+        </td>
+
+        <td class="check-cell">
+          <input
+            id="criterio_${i}_sec1"
+            type="checkbox">
+        </td>
+
+        <td class="check-cell">
+          <input
+            id="criterio_${i}_sec2"
+            type="checkbox">
+        </td>
+
+        <td class="check-cell">
+          <input
+            id="criterio_${i}_sec3"
+            type="checkbox">
+        </td>
+
+        <td>
+
+          <textarea
+            id="criterio_${i}_obs"
+            placeholder="Ajuste o alerta"></textarea>
+
+        </td>
+
+      </tr>
+
+    `;
+  }
+
+  document.getElementById(
+    "criteriaBody"
+  ).innerHTML =
+    html;
+
+}
+
+/* =====================================================
+   MAPA DE MIX
+===================================================== */
+
+const mixRows = [
+
+  {
+    id:"inicio",
+    momento:"Inicio / diagnóstico",
+    evidencia:"Evidencia de entrada o saberes previos.",
+    tarea:"Test, caso breve, lluvia de ideas, análisis inicial.",
+    mix:"Diagnóstica + autoevaluación o heteroevaluación + inicial + cuantitativa/cualitativa.",
+    tecnica:"Interrogatorio / observación.",
+    instrumento:"Forms, Canvas Quiz, Quizizz, lista breve.",
+    ia:"Forms, Quizizz, Copilot/ChatGPT para revisar preguntas.",
+    feedback:"Identificar brechas y ajustar orientación inicial."
+  },
+
+  {
+    id:"proceso1",
+    momento:"Proceso 1",
+    evidencia:"Evidencia secundaria 1.",
+    tarea:"Tarea académica, análisis de caso, organizador, borrador.",
+    mix:"Formativa + coevaluación/heteroevaluación + continua + cualitativa.",
+    tecnica:"Realizaciones o producciones.",
+    instrumento:"Lista de cotejo, guía de revisión.",
+    ia:"Miro, Padlet, Canva, Gemini/Copilot para ideación.",
+    feedback:"Retroalimentar comprensión, enfoque y criterios."
+  },
+
+  {
+    id:"proceso2",
+    momento:"Proceso 2",
+    evidencia:"Evidencia secundaria 2.",
+    tarea:"Simulación, práctica guiada, prototipo, avance.",
+    mix:"Formativa + autoevaluación/coevaluación + continua + mixta.",
+    tecnica:"Observación / análisis de desempeño.",
+    instrumento:"Guía de observación, escala, rúbrica preliminar.",
+    ia:"Teams, OneDrive, IA para mejorar consigna o criterios.",
+    feedback:"Identificar ajustes antes del producto final."
+  },
+
+  {
+    id:"cierre",
+    momento:"Cierre / desempeño",
+    evidencia:"Evidencia principal auténtica.",
+    tarea:"Proyecto, sustentación, simulación, informe, producto, portafolio.",
+    mix:"Sumativa con finalidad formativa + heteroevaluación/coevaluación + final + mixta.",
+    tecnica:"Análisis de desempeño.",
+    instrumento:"Rúbrica analítica, portafolio, guía de sustentación.",
+    ia:"Canvas, rúbricas, Gamma/Canva para presentación.",
+    feedback:"Valorar desempeño y orientar transferencia."
+  },
+
+  {
+    id:"despues",
+    momento:"Después / mejora",
+    evidencia:"Reflexión, autoevaluación o plan de mejora.",
+    tarea:"Diario, ticket de salida, retroalimentación final, compromiso.",
+    mix:"Como aprendizaje + autoevaluación + cierre + cualitativa.",
+    tecnica:"Metacognición / reflexión.",
+    instrumento:"Bitácora, formulario reflexivo, foro.",
+    ia:"Canvas, Forms, Padlet, IA para ordenar reflexiones.",
+    feedback:"Definir acciones de mejora y transferencia."
+  },
+
+  {
+    id:"otro",
+    momento:"Otro momento",
+    evidencia:"Completar si aplica.",
+    tarea:"Completar.",
+    mix:"Completar.",
+    tecnica:"Completar.",
+    instrumento:"Completar.",
+    ia:"Completar.",
+    feedback:"Completar."
+  }
+
+];
+
+function renderMix(){
+
+  document.getElementById(
+    "mixBody"
+  ).innerHTML =
+    mixRows.map(row=>`
+
+      <tr>
+
+        <td>
+          ${row.momento}
+        </td>
+
+        <td>
+          ${row.evidencia}
+          <textarea
+            id="${row.id}_evidencia"
+            placeholder="Ajustar al curso"></textarea>
+        </td>
+
+        <td>
+          ${row.tarea}
+          <textarea
+            id="${row.id}_tarea"
+            placeholder="Ajustar al curso"></textarea>
+        </td>
+
+        <td>
+          ${row.mix}
+          <textarea
+            id="${row.id}_mix"
+            placeholder="Ajustar al curso"></textarea>
+        </td>
+
+        <td>
+          ${row.tecnica}
+          <textarea
+            id="${row.id}_tecnica"
+            placeholder="Ajustar al curso"></textarea>
+        </td>
+
+        <td>
+          ${row.instrumento}
+          <textarea
+            id="${row.id}_instrumento"
+            placeholder="Ajustar al curso"></textarea>
+        </td>
+
+        <td>
+          ${row.ia}
+          <textarea
+            id="${row.id}_ia"
+            placeholder="Ajustar al curso"></textarea>
+        </td>
+
+        <td>
+          ${row.feedback}
+          <textarea
+            id="${row.id}_feedback"
+            placeholder="Ajustar al curso"></textarea>
+        </td>
+
+      </tr>
+
+    `).join("");
+
+}
+
+/* =====================================================
+   IA / TIC
+===================================================== */
+
+const iaRows = [
+
+  {
+    id:"chatgpt",
+    herramienta:"ChatGPT / Copilot / Gemini",
+    uso:"Idear criterios, mejorar consignas, generar alternativas de retroalimentación.",
+    prompt:"Registrar el prompt utilizado.",
+    validacion:"Revisar pertinencia, sesgos, claridad y alineación con el resultado.",
+    riesgo:"No delegar el juicio evaluativo; verificar información.",
+    evidencia:"Captura, enlace o breve descripción."
+  },
+
+  {
+    id:"forms",
+    herramienta:"Forms / Canvas Quiz / Quizizz",
+    uso:"Diagnóstico, práctica de recuperación y retroalimentación automática.",
+    prompt:"Indicar qué preguntas o criterios se diseñaron.",
+    validacion:"Verificar respuestas correctas, dificultad y accesibilidad.",
+    riesgo:"No usar como única evidencia de competencia.",
+    evidencia:"Enlace o captura."
+  },
+
+  {
+    id:"padlet",
+    herramienta:"Padlet / Miro / Whiteboard",
+    uso:"Compartir avances, coevaluar ideas, construir mapas o síntesis.",
+    prompt:"Indicar consigna de participación.",
+    validacion:"Revisar interacción, respeto y calidad de aportes.",
+    riesgo:"Proteger datos y evitar exposición innecesaria.",
+    evidencia:"Enlace o captura."
+  },
+
+  {
+    id:"canva",
+    herramienta:"Canva / Gamma / Genially",
+    uso:"Presentar retos, evidencias, productos o sustentaciones.",
+    prompt:"Indicar consigna de uso.",
+    validacion:"Verificar autoría, fuentes y coherencia con criterios.",
+    riesgo:"Declarar uso de IA visual si corresponde.",
+    evidencia:"Enlace o captura."
+  },
+
+  {
+    id:"elegida1",
+    herramienta:"Herramienta elegida 1",
+    uso:"Completar.",
+    prompt:"Completar.",
+    validacion:"Completar.",
+    riesgo:"Completar.",
+    evidencia:"Completar."
+  },
+
+  {
+    id:"elegida2",
+    herramienta:"Herramienta elegida 2",
+    uso:"Completar.",
+    prompt:"Completar.",
+    validacion:"Completar.",
+    riesgo:"Completar.",
+    evidencia:"Completar."
+  }
+
+];
+
+function renderIA(){
+
+  document.getElementById(
+    "iaBody"
+  ).innerHTML =
+    iaRows.map(row=>`
+
+      <tr>
+
+        <td>
+          ${row.herramienta}
+        </td>
+
+        <td>
+          ${row.uso}
+          <textarea
+            id="${row.id}_uso"
+            placeholder="Completar"></textarea>
+        </td>
+
+        <td>
+          ${row.prompt}
+          <textarea
+            id="${row.id}_prompt"
+            placeholder="Completar"></textarea>
+        </td>
+
+        <td>
+          ${row.validacion}
+          <textarea
+            id="${row.id}_validacion"
+            placeholder="Completar"></textarea>
+        </td>
+
+        <td>
+          ${row.riesgo}
+          <textarea
+            id="${row.id}_riesgo"
+            placeholder="Completar"></textarea>
+        </td>
+
+        <td>
+          ${row.evidencia}
+          <textarea
+            id="${row.id}_evidencia"
+            placeholder="Completar"></textarea>
+        </td>
+
+      </tr>
+
+    `).join("");
+
+}
+
+/* =====================================================
+   RETROALIMENTACIÓN
+===================================================== */
+
+const feedbackRows = [
+
+  {
+    id:"antes",
+    momento:"Antes del reto",
+    que:"Comprensión del resultado, consigna, criterios y condiciones.",
+    quien:"Docente / pares.",
+    como:"Orientación sincrónica, ejemplo, checklist.",
+    decision:"Ajustar dudas y asegurar comprensión."
+  },
+
+  {
+    id:"durante",
+    momento:"Durante la producción",
+    que:"Avances, decisiones, errores frecuentes, uso de criterios.",
+    quien:"Docente, pares o autoevaluación.",
+    como:"Comentario en documento, rúbrica preliminar, foro.",
+    decision:"Revisar y mejorar antes de la entrega."
+  },
+
+  {
+    id:"final",
+    momento:"Entrega final",
+    que:"Calidad del producto o desempeño respecto a criterios.",
+    quien:"Docente, jurado o pares.",
+    como:"Rúbrica y orientación prospectiva.",
+    decision:"Valorar logro y proyectar mejora."
+  },
+
+  {
+    id:"post",
+    momento:"Después de la entrega",
+    que:"Aprendizaje logrado y transferencia a otra situación.",
+    quien:"Estudiante y docente.",
+    como:"Bitácora, reflexión, plan de mejora.",
+    decision:"Definir mejoras para próxima aplicación."
+  }
+
+];
+
+function renderFeedback(){
+
+  document.getElementById(
+    "feedbackBody"
+  ).innerHTML =
+    feedbackRows.map(row=>`
+
+      <tr>
+
+        <td>
+          ${row.momento}
+        </td>
+
+        <td>
+          ${row.que}
+          <textarea
+            id="${row.id}_que"
+            placeholder="Completar / ajustar"></textarea>
+        </td>
+
+        <td>
+          ${row.quien}
+          <textarea
+            id="${row.id}_quien"
+            placeholder="Completar / ajustar"></textarea>
+        </td>
+
+        <td>
+          ${row.como}
+          <textarea
+            id="${row.id}_como"
+            placeholder="Completar / ajustar"></textarea>
+        </td>
+
+        <td>
+          ${row.decision}
+          <textarea
+            id="${row.id}_decision"
+            placeholder="Completar / ajustar"></textarea>
+        </td>
+
+      </tr>
+
+    `).join("");
+
+}
+
+/* =====================================================
+   GUARDADO
+===================================================== */
+
+function allFields(){
+
+  return [
+    ...document.querySelectorAll(
+      "input, textarea, select"
+    )
+  ];
+
+}
+
+function saveState(){
+
+  const state = {};
+
+  allFields().forEach(field=>{
+
+    if(!field.id){
+      return;
+    }
+
+    if(field.type === "checkbox"){
+      state[field.id] =
+        field.checked;
+    }else{
+      state[field.id] =
+        field.value;
+    }
+
+  });
+
+  try{
+
+    localStorage.setItem(
+      "sise-aa2-mix-v2",
+      JSON.stringify(state)
+    );
+
+  }catch(error){}
+
+}
+
+function loadState(){
+
+  try{
+
+    const raw =
+      localStorage.getItem(
+        "sise-aa2-mix-v2"
+      );
+
+    if(!raw){
+      return;
+    }
+
+    const state =
+      JSON.parse(raw);
+
+    Object.keys(state).forEach(id=>{
+
+      const field =
+        document.getElementById(id);
+
+      if(!field){
+        return;
+      }
+
+      if(field.type === "checkbox"){
+        field.checked =
+          !!state[id];
+      }else{
+        field.value =
+          state[id] || "";
+      }
+
+    });
+
+  }catch(error){}
+
+}
+
+document.addEventListener(
+  "input",
+  saveState
+);
+
+document.addEventListener(
+  "change",
+  saveState
+);
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+function value(id){
+
+  const element =
+    document.getElementById(id);
+
+  return element
+    ? String(element.value || "").trim()
+    : "";
+
+}
+
+function safeText(text){
+
+  return String(text || "").trim()
+    || "Sin completar";
+
+}
+
+function showStatus(message){
+
+  const status =
+    document.getElementById("status");
+
+  status.textContent =
+    message;
+
+  status.classList.add("show");
+
+  setTimeout(()=>{
+
+    status.classList.remove(
+      "show"
+    );
+
+  },3500);
+
+}
+
+/* =====================================================
+   REINICIAR
+===================================================== */
+
+function resetForm(){
+
+  const accepted =
+    confirm(
+      "¿Deseas borrar todas las respuestas registradas en la AA2?"
+    );
+
+  if(!accepted){
+    return;
+  }
+
+  allFields().forEach(field=>{
+
+    if(field.id === "codigo"){
+      field.value = "AA2";
+      return;
+    }
+
+    if(
+      field.id ===
+      "productoEsperado"
+    ){
+      field.value =
+        "Mapa de mix de evaluación auténtica";
+      return;
+    }
+
+    if(
+      field.type ===
+      "checkbox"
+    ){
+      field.checked = false;
+    }
+
+    else if(
+      field.tagName ===
+      "SELECT"
+    ){
+      field.selectedIndex = 0;
+    }
+
+    else{
+      field.value = "";
+    }
+
+  });
+
+  try{
+
+    localStorage.removeItem(
+      "sise-aa2-mix-v2"
+    );
+
+  }catch(error){}
+
+  goScreen(0);
+
+}
+
+/* =====================================================
+   WORD
+===================================================== */
+
+async function downloadWord(){
+
+  saveState();
+
+  if(!window.docx){
+
+    alert(
+      "No se pudo cargar el generador de Word. Verifica tu conexión."
+    );
+
+    return;
+  }
+
+  const {
+    Document,
+    Packer,
+    Paragraph,
+    TextRun,
+    Table,
+    TableRow,
+    TableCell,
+    WidthType,
+    BorderStyle,
+    ShadingType,
+    AlignmentType,
+    PageOrientation
+  } = window.docx;
+
+  const RED =
+    "FF0E49";
+
+  const DARK =
+    "241F21";
+
+  const GRAY =
+    "F4F2F3";
+
+  const BORDER =
+    "DDD5D8";
+
+  function para(
+    text,
+    options={}
+  ){
+
+    return new Paragraph({
+
+      children:[
+
+        new TextRun({
+
+          text:
+            String(text || ""),
+
+          bold:
+            !!options.bold,
+
+          color:
+            options.color || DARK,
+
+          size:
+            options.size || 19
+
+        })
+
+      ],
+
+      alignment:
+        options.align ||
+        AlignmentType.LEFT,
+
+      spacing:{
+        before:
+          options.before || 0,
+
+        after:
+          options.after ?? 100
+      }
+
+    });
+
+  }
+
+  function title(
+    number,
+    text
+  ){
+
+    return para(
+      `${number}. ${text}`,
+      {
+        bold:true,
+        color:RED,
+        size:27,
+        before:220,
+        after:120
+      }
+    );
+
+  }
+
+  function twoCellRow(
+    label,
+    answer
+  ){
+
+    return new TableRow({
+
+      children:[
+
+        new TableCell({
+
+          shading:{
+            type:ShadingType.CLEAR,
+            fill:GRAY
+          },
+
+          margins:{
+            top:100,
+            bottom:100,
+            left:100,
+            right:100
+          },
+
+          children:[
+            para(
+              label,
+              {
+                bold:true,
+                after:0
+              }
+            )
+          ]
+
+        }),
+
+        new TableCell({
+
+          margins:{
+            top:100,
+            bottom:100,
+            left:100,
+            right:100
+          },
+
+          children:[
+            para(
+              safeText(answer),
+              {
+                after:0
+              }
+            )
+          ]
+
+        })
+
+      ]
+
+    });
+
+  }
+
+  const borders = {
+
+    top:{
+      style:BorderStyle.SINGLE,
+      size:1,
+      color:BORDER
+    },
+
+    bottom:{
+      style:BorderStyle.SINGLE,
+      size:1,
+      color:BORDER
+    },
+
+    left:{
+      style:BorderStyle.SINGLE,
+      size:1,
+      color:BORDER
+    },
+
+    right:{
+      style:BorderStyle.SINGLE,
+      size:1,
+      color:BORDER
+    },
+
+    insideHorizontal:{
+      style:BorderStyle.SINGLE,
+      size:1,
+      color:BORDER
+    },
+
+    insideVertical:{
+      style:BorderStyle.SINGLE,
+      size:1,
+      color:BORDER
+    }
+
+  };
+
+  const generalTable =
+    new Table({
+
+      width:{
+        size:100,
+        type:WidthType.PERCENTAGE
+      },
+
+      borders,
+
+      rows:[
+
+        twoCellRow(
+          "Docente participante",
+          value("docente")
+        ),
+
+        twoCellRow(
+          "SISE carreras / SISE formación continua",
+          value("unidadNegocio")
+        ),
+
+        twoCellRow(
+          "Curso que rediseña",
+          value("curso")
+        ),
+
+        twoCellRow(
+          "Programa / carrera",
+          value("programa")
+        ),
+
+        twoCellRow(
+          "Unidad o sesión del curso",
+          value("unidadCurso")
+        ),
+
+        twoCellRow(
+          "Fecha de entrega",
+          value("fecha")
+        ),
+
+        twoCellRow(
+          "Evidencia diagnosticada en AA1",
+          value("evidenciaAA1")
+        ),
+
+        twoCellRow(
+          "Código de evidencia",
+          "AA2"
+        ),
+
+        twoCellRow(
+          "Resultado de aprendizaje del curso",
+          value("resultadoCurso")
+        ),
+
+        twoCellRow(
+          "Modalidad de aplicación",
+          value("modalidad")
+        ),
+
+        twoCellRow(
+          "Herramientas IA/TIC previstas",
+          value("herramientasPrevistas")
+        ),
+
+        twoCellRow(
+          "Producto final esperado",
+          value("productoEsperado")
+        )
+
+      ]
+
+    });
+
+  const designInverse =
+    new Table({
+
+      width:{
+        size:100,
+        type:WidthType.PERCENTAGE
+      },
+
+      borders,
+
+      rows:[
+
+        twoCellRow(
+          "Resultado de aprendizaje priorizado",
+          value("p1_resultado")
+        ),
+
+        twoCellRow(
+          "Competencia o capacidad vinculada",
+          value("p1_competencia")
+        ),
+
+        twoCellRow(
+          "Problema de desempeño detectado en AA1",
+          value("p1_problema")
+        ),
+
+        twoCellRow(
+          "Meta de desempeño",
+          value("p1_meta")
+        ),
+
+        twoCellRow(
+          "Reto auténtico",
+          value("p1_reto")
+        ),
+
+        twoCellRow(
+          "Rol del estudiante",
+          value("p1_rol")
+        ),
+
+        twoCellRow(
+          "Audiencia o destinatario",
+          value("p1_audiencia")
+        ),
+
+        twoCellRow(
+          "Condiciones de desempeño",
+          value("p1_condiciones")
+        )
+
+      ]
+
+    });
+
+  const synthesisTable =
+    new Table({
+
+      width:{
+        size:100,
+        type:WidthType.PERCENTAGE
+      },
+
+      borders,
+
+      rows:[
+
+        twoCellRow(
+          "¿Qué cambia respecto a la evidencia diagnosticada en AA1?",
+          value("sintesis1")
+        ),
+
+        twoCellRow(
+          "¿Por qué el nuevo diseño es más auténtico?",
+          value("sintesis2")
+        ),
+
+        twoCellRow(
+          "¿Cómo se equilibra evaluación diagnóstica, formativa, sumativa y como aprendizaje?",
+          value("sintesis3")
+        ),
+
+        twoCellRow(
+          "¿Qué decisiones pedagógicas se tomarán con los resultados?",
+          value("sintesis4")
+        ),
+
+        twoCellRow(
+          "¿Qué cuidados éticos se aplicarán en el uso de IA/TIC?",
+          value("sintesis5")
+        )
+
+      ]
+
+    });
+
+  const iaDeclaration =
+    new Table({
+
+      width:{
+        size:100,
+        type:WidthType.PERCENTAGE
+      },
+
+      borders,
+
+      rows:[
+
+        twoCellRow(
+          "Herramientas utilizadas",
+          value(
+            "iaDeclaracionHerramientas"
+          )
+        ),
+
+        twoCellRow(
+          "Propósito del uso",
+          value(
+            "iaDeclaracionProposito"
+          )
+        ),
+
+        twoCellRow(
+          "Prompts o instrucciones",
+          value(
+            "iaDeclaracionPrompts"
+          )
+        )
+
+      ]
+
+    });
+
+  const doc =
+    new Document({
+
+      sections:[{
+
+        children:[
+
+          para(
+            "FORMATO DE EVIDENCIA DE APRENDIZAJE",
+            {
+              bold:true,
+              align:AlignmentType.CENTER,
+              size:21
+            }
+          ),
+
+          para(
+            "AA2 - Mapa de Mix de Evaluación para el Diseño de una Evaluación Auténtica",
+            {
+              bold:true,
+              color:RED,
+              align:AlignmentType.CENTER,
+              size:31,
+              after:100
+            }
+          ),
+
+          para(
+            "Curso: Diseño de Evaluaciones Auténticas y por Competencias",
+            {
+              bold:true,
+              align:AlignmentType.CENTER,
+              size:21,
+              after:80
+            }
+          ),
+
+          para(
+            "Tiempo estimado: 60 minutos",
+            {
+              bold:true,
+              color:RED,
+              align:AlignmentType.CENTER,
+              size:19,
+              after:220
+            }
+          ),
+
+          para(
+            "PROPÓSITO DE AA2",
+            {
+              bold:true,
+              color:RED,
+              size:20,
+              after:40
+            }
+          ),
+
+          para(
+            "Diseñar un mapa de mix de evaluación que articule resultado de aprendizaje, reto auténtico, evidencias, criterios preliminares, tipos de evaluación, técnicas, instrumentos, retroalimentación y uso responsable de IA y TIC. Este formato convierte el diagnóstico AA1 en una propuesta de evaluación auténtica aplicable a un curso real.",
+            {
+              after:180
+            }
+          ),
+
+          title(
+            "1",
+            "Datos generales del participante y del curso"
+          ),
+
+          generalTable,
+
+          title(
+            "2",
+            "Orientación pedagógica del formato"
+          ),
+
+          para(
+            "Diseño inverso: Parte del resultado esperado y pregunta qué evidencia es suficiente para demostrar el aprendizaje."
+          ),
+
+          para(
+            "Mix de evaluación: Combina tipos de evaluación según propósito, actor, temporalidad y método."
+          ),
+
+          para(
+            "IA y TIC responsables: Usa IA y TIC como apoyo pedagógico. La decisión final y validación corresponden al docente."
+          ),
+
+          title(
+            "3",
+            "Paso 1: Diseño inverso - resultado, desempeño y reto"
+          ),
+
+          designInverse,
+
+          title(
+            "9",
+            "Síntesis final del diseño AA2"
+          ),
+
+          synthesisTable,
+
+          title(
+            "13",
+            "Declaración breve de uso de IA en AA2"
+          ),
+
+          iaDeclaration,
+
+          title(
+            "14",
+            "Fuentes de apoyo para el formato"
+          ),
+
+          para(
+            "Material M1-S2 y 3: Estrategia de evaluación. Diseño inverso, definición de evidencias, tareas auténticas, técnicas e instrumentos."
+          ),
+
+          para(
+            "Trabajo Final: Kit de Evaluación del Curso. Ejemplo de articulación entre evidencia, tipo de tarea, técnica, instrumento y tipo de evaluación."
+          ),
+
+          para(
+            "Lineamiento SISE de uso de Inteligencia Artificial para docentes y estudiantes. Principios de transparencia, veracidad, privacidad, responsabilidad y supervisión humana."
+          )
+
+        ]
+
+      }]
+
+    });
+
+  try{
+
+    const blob =
+      await Packer.toBlob(doc);
+
+    const url =
+      URL.createObjectURL(blob);
+
+    const link =
+      document.createElement("a");
+
+    link.href =
+      url;
+
+    link.download =
+      "AA2_mapa_mix_evaluacion.docx";
+
+    document.body.appendChild(link);
+
+    link.click();
+    link.remove();
+
+    URL.revokeObjectURL(url);
+
+    showStatus(
+      "Documento Word descargado correctamente."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "No fue posible generar el documento Word."
+    );
+
+  }
+
+}
+
+/* =====================================================
+   PDF
+===================================================== */
+
+function downloadPDF(){
+
+  saveState();
+
+  if(
+    !window.jspdf ||
+    !window.jspdf.jsPDF
+  ){
+
+    alert(
+      "No se pudo cargar el generador de PDF."
+    );
+
+    return;
+  }
+
+  const {
+    jsPDF
+  } =
+    window.jspdf;
+
+  const pdf =
+    new jsPDF({
+      orientation:"landscape",
+      unit:"mm",
+      format:"a4"
+    });
+
+  const RED =
+    [255,14,73];
+
+  const DARK =
+    [36,31,33];
+
+  pdf.setFillColor(
+    DARK[0],
+    DARK[1],
+    DARK[2]
+  );
+
+  pdf.rect(
+    0,
+    0,
+    297,
+    40,
+    "F"
+  );
+
+  pdf.setFillColor(
+    RED[0],
+    RED[1],
+    RED[2]
+  );
+
+  pdf.rect(
+    0,
+    0,
+    297,
+    4,
+    "F"
+  );
+
+  pdf.setTextColor(
+    255,
+    255,
+    255
+  );
+
+  pdf.setFont(
+    "helvetica",
+    "bold"
+  );
+
+  pdf.setFontSize(17);
+
+  pdf.text(
+    "AA2 · Mapa de Mix de Evaluación Auténtica",
+    14,
+    17
+  );
+
+  pdf.setFont(
+    "helvetica",
+    "normal"
+  );
+
+  pdf.setFontSize(9);
+
+  pdf.text(
+    "Diseño de Evaluaciones Auténticas y por Competencias · Tiempo estimado: 60 minutos",
+    14,
+    26
+  );
+
+  pdf.setTextColor(
+    60,
+    55,
+    57
+  );
+
+  pdf.setFontSize(9);
+
+  let y = 50;
+
+  const items = [
+
+    [
+      "Docente participante",
+      value("docente")
+    ],
+
+    [
+      "Curso que rediseña",
+      value("curso")
+    ],
+
+    [
+      "Programa / carrera",
+      value("programa")
+    ],
+
+    [
+      "Resultado de aprendizaje",
+      value("resultadoCurso")
+    ],
+
+    [
+      "Problema detectado en AA1",
+      value("p1_problema")
+    ],
+
+    [
+      "Meta de desempeño",
+      value("p1_meta")
+    ],
+
+    [
+      "Reto auténtico",
+      value("p1_reto")
+    ],
+
+    [
+      "Rol del estudiante",
+      value("p1_rol")
+    ],
+
+    [
+      "Audiencia o destinatario",
+      value("p1_audiencia")
+    ],
+
+    [
+      "Condiciones de desempeño",
+      value("p1_condiciones")
+    ],
+
+    [
+      "Cambios respecto a AA1",
+      value("sintesis1")
+    ],
+
+    [
+      "Por qué el nuevo diseño es más auténtico",
+      value("sintesis2")
+    ],
+
+    [
+      "Equilibrio del mix",
+      value("sintesis3")
+    ],
+
+    [
+      "Decisiones pedagógicas",
+      value("sintesis4")
+    ],
+
+    [
+      "Cuidados éticos IA/TIC",
+      value("sintesis5")
+    ],
+
+    [
+      "Herramientas de IA utilizadas",
+      value(
+        "iaDeclaracionHerramientas"
+      )
+    ],
+
+    [
+      "Propósito del uso de IA",
+      value(
+        "iaDeclaracionProposito"
+      )
+    ],
+
+    [
+      "Prompts o instrucciones",
+      value(
+        "iaDeclaracionPrompts"
+      )
+    ]
+
+  ];
+
+  items.forEach(item=>{
+
+    if(y > 186){
+
+      pdf.addPage();
+
+      y = 18;
+
+    }
+
+    pdf.setFont(
+      "helvetica",
+      "bold"
+    );
+
+    pdf.setTextColor(
+      RED[0],
+      RED[1],
+      RED[2]
+    );
+
+    pdf.text(
+      item[0],
+      14,
+      y
+    );
+
+    pdf.setFont(
+      "helvetica",
+      "normal"
+    );
+
+    pdf.setTextColor(
+      60,
+      55,
+      57
+    );
+
+    const lines =
+      pdf.splitTextToSize(
+        safeText(item[1]),
+        260
+      );
+
+    pdf.text(
+      lines,
+      14,
+      y + 5
+    );
+
+    y +=
+      9 +
+      lines.length * 4;
+
+  });
+
+  const pages =
+    pdf.internal.getNumberOfPages();
+
+  for(
+    let page=1;
+    page<=pages;
+    page++
+  ){
+
+    pdf.setPage(page);
+
+    pdf.setFontSize(7);
+
+    pdf.setTextColor(
+      130,
+      120,
+      124
+    );
+
+    pdf.text(
+      "Formación Docente SISE · AA2",
+      14,
+      202
+    );
+
+    pdf.text(
+      `Página ${page} de ${pages}`,
+      283,
+      202,
+      {
+        align:"right"
+      }
+    );
+
+  }
+
+  pdf.save(
+    "AA2_mapa_mix_evaluacion.pdf"
+  );
+
+  showStatus(
+    "PDF descargado correctamente."
+  );
+
+}
+
+/* =====================================================
+   INICIO
+===================================================== */
+
+renderEvidence();
+renderCriteria();
+renderMix();
+renderIA();
+renderFeedback();
+
+loadState();
+
+goScreen(0);
+
+</script>
+
+</body>
+</html>
