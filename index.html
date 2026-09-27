@@ -202,7 +202,65 @@ select:focus-visible{
 }
 
 /* =====================================================
-   PROGRESO GENERAL
+   COEVALUACIÓN
+===================================================== */
+
+.coevaluation-box{
+  display:flex;
+  align-items:flex-start;
+  gap:15px;
+  margin:18px 0;
+  padding:19px 20px;
+  border:1px solid #F4CBD8;
+  border-left:6px solid var(--red);
+  border-radius:11px;
+  background:var(--soft);
+}
+
+.coevaluation-icon{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 44px;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:var(--red);
+  color:#fff;
+  font-size:21px;
+  font-weight:900;
+}
+
+.coevaluation-content{
+  flex:1;
+}
+
+.coevaluation-content small{
+  display:block;
+  margin-bottom:4px;
+  color:var(--red);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+
+.coevaluation-content h3{
+  margin:0 0 6px;
+  color:var(--dark);
+  font-size:21px;
+  font-weight:900;
+}
+
+.coevaluation-content p{
+  margin:0;
+  color:#51484B;
+  font-size:14px;
+  line-height:1.6;
+}
+
+/* =====================================================
+   PROGRESO
 ===================================================== */
 
 .progress-shell{
@@ -333,7 +391,7 @@ select:focus-visible{
 }
 
 /* =====================================================
-   CAMPOS
+   FORMULARIO
 ===================================================== */
 
 .grid{
@@ -541,6 +599,7 @@ td textarea{
 
 .check-cell{
   text-align:center;
+  vertical-align:middle;
 }
 
 .check-cell input{
@@ -566,7 +625,7 @@ td textarea{
 }
 
 /* =====================================================
-   BOTONES
+   NAVEGACIÓN
 ===================================================== */
 
 .navigation{
@@ -692,6 +751,10 @@ td textarea{
     padding:16px;
   }
 
+  .coevaluation-box{
+    flex-direction:column;
+  }
+
   .navigation,
   .navigation-right{
     width:100%;
@@ -748,7 +811,7 @@ td textarea{
     <div class="meta">
       <span>AA2</span>
       <span>⏱ 60 minutos</span>
-      <span>Diseño de evaluación auténtica</span>
+      <span>Coevaluación</span>
       <span>Descarga Word y PDF</span>
     </div>
 
@@ -773,6 +836,40 @@ td textarea{
     Este formato convierte el diagnóstico AA1 en una propuesta de evaluación
     auténtica aplicable a un curso real.
   </p>
+
+</div>
+
+<!-- =====================================================
+     COEVALUACIÓN
+===================================================== -->
+
+<div class="coevaluation-box">
+
+  <div class="coevaluation-icon">
+    ⇄
+  </div>
+
+  <div class="coevaluation-content">
+
+    <small>
+      Modalidad de evaluación
+    </small>
+
+    <h3>
+      Esta actividad se desarrolla mediante coevaluación
+    </h3>
+
+    <p>
+      Completa tu Mapa de Mix de Evaluación de manera individual y,
+      al finalizar, compártelo con un compañero para recibir una valoración
+      externa sobre la coherencia de tu propuesta. Del mismo modo,
+      revisarás el trabajo de un compañero considerando la articulación
+      entre resultado de aprendizaje, reto auténtico, evidencias,
+      criterios, tipos de evaluación, retroalimentación y uso responsable
+      de IA y TIC.
+    </p>
+
+  </div>
 
 </div>
 
@@ -804,8 +901,7 @@ td textarea{
 </div>
 
 <!-- =====================================================
-     PANTALLA 1
-     SECCIONES 1 Y 2
+     PANTALLA 1 · SECCIONES 1 Y 2
 ===================================================== -->
 
 <div class="screen active">
@@ -814,9 +910,7 @@ td textarea{
 
   <div class="section-head">
 
-    <small>
-      1
-    </small>
+    <small>1</small>
 
     <h2>
       Datos generales del participante y del curso
@@ -955,15 +1049,15 @@ td textarea{
             Seleccionar
           </option>
 
-          <option>
+          <option value="Presencial">
             Presencial
           </option>
 
-          <option>
+          <option value="Virtual">
             Virtual
           </option>
 
-          <option>
+          <option value="Híbrida">
             Híbrida
           </option>
 
@@ -1006,9 +1100,7 @@ td textarea{
 
   <div class="section-head">
 
-    <small>
-      2
-    </small>
+    <small>2</small>
 
     <h2>
       Orientación pedagógica del formato
@@ -1027,10 +1119,10 @@ td textarea{
         </h3>
 
         <p>
-          Parte del resultado esperado y pregunta:
-          ¿qué evidencia es suficiente para demostrar el aprendizaje?
-          Luego define experiencias y actividades que preparen al
-          estudiante para producir esa evidencia.
+          Parte del resultado esperado y pregunta: ¿qué evidencia
+          es suficiente para demostrar el aprendizaje? Luego define
+          experiencias y actividades que preparen al estudiante
+          para producir esa evidencia.
         </p>
 
       </article>
@@ -1087,6 +1179,7 @@ td textarea{
       <span></span>
 
       <button
+        type="button"
         class="btn"
         onclick="goScreen(1)">
         Continuar al paso 3 →
@@ -1101,8 +1194,7 @@ td textarea{
 </div>
 
 <!-- =====================================================
-     PANTALLA 2
-     SECCIÓN 3
+     PANTALLA 2 · SECCIÓN 3
 ===================================================== -->
 
 <div class="screen">
@@ -1176,9 +1268,8 @@ td textarea{
         <div class="component-content">
 
           <small>
-            Describa la brecha principal:
-            ¿qué no logran demostrar aún los estudiantes
-            con la evidencia actual?
+            Describa la brecha principal: ¿qué no logran
+            demostrar aún los estudiantes con la evidencia actual?
           </small>
 
           <textarea
@@ -1262,7 +1353,7 @@ td textarea{
 
           <small>
             Indique quién recibirá, usará o valorará la evidencia:
-            cliente, jurado, equipo, usuario, comunidad, docente, pares.
+            cliente, jurado, equipo, usuario, comunidad, docente o pares.
           </small>
 
           <textarea
@@ -1299,12 +1390,14 @@ td textarea{
     <div class="navigation">
 
       <button
+        type="button"
         class="btn secondary"
         onclick="goScreen(0)">
         ← Anterior
       </button>
 
       <button
+        type="button"
         class="btn"
         onclick="goScreen(2)">
         Continuar al paso 4 →
@@ -1319,8 +1412,7 @@ td textarea{
 </div>
 
 <!-- =====================================================
-     PANTALLA 3
-     SECCIÓN 4
+     PANTALLA 3 · SECCIÓN 4
 ===================================================== -->
 
 <div class="screen">
@@ -1379,12 +1471,14 @@ td textarea{
     <div class="navigation">
 
       <button
+        type="button"
         class="btn secondary"
         onclick="goScreen(1)">
         ← Anterior
       </button>
 
       <button
+        type="button"
         class="btn"
         onclick="goScreen(3)">
         Continuar al paso 5 →
@@ -1399,8 +1493,7 @@ td textarea{
 </div>
 
 <!-- =====================================================
-     PANTALLA 4
-     SECCIÓN 5
+     PANTALLA 4 · SECCIÓN 5
 ===================================================== -->
 
 <div class="screen">
@@ -1447,12 +1540,14 @@ td textarea{
     <div class="navigation">
 
       <button
+        type="button"
         class="btn secondary"
         onclick="goScreen(2)">
         ← Anterior
       </button>
 
       <button
+        type="button"
         class="btn"
         onclick="goScreen(4)">
         Continuar al paso 6 →
@@ -1467,8 +1562,7 @@ td textarea{
 </div>
 
 <!-- =====================================================
-     PANTALLA 5
-     SECCIÓN 6
+     PANTALLA 5 · SECCIÓN 6
 ===================================================== -->
 
 <div class="screen">
@@ -1524,12 +1618,14 @@ td textarea{
     <div class="navigation">
 
       <button
+        type="button"
         class="btn secondary"
         onclick="goScreen(3)">
         ← Anterior
       </button>
 
       <button
+        type="button"
         class="btn"
         onclick="goScreen(5)">
         Continuar al paso 7 →
@@ -1544,8 +1640,7 @@ td textarea{
 </div>
 
 <!-- =====================================================
-     PANTALLA 6
-     SECCIÓN 7
+     PANTALLA 6 · SECCIÓN 7
 ===================================================== -->
 
 <div class="screen">
@@ -1592,12 +1687,14 @@ td textarea{
     <div class="navigation">
 
       <button
+        type="button"
         class="btn secondary"
         onclick="goScreen(4)">
         ← Anterior
       </button>
 
       <button
+        type="button"
         class="btn"
         onclick="goScreen(6)">
         Continuar al paso 8 →
@@ -1612,8 +1709,7 @@ td textarea{
 </div>
 
 <!-- =====================================================
-     PANTALLA 7
-     SECCIÓN 8
+     PANTALLA 7 · SECCIÓN 8
 ===================================================== -->
 
 <div class="screen">
@@ -1659,12 +1755,14 @@ td textarea{
     <div class="navigation">
 
       <button
+        type="button"
         class="btn secondary"
         onclick="goScreen(5)">
         ← Anterior
       </button>
 
       <button
+        type="button"
         class="btn"
         onclick="goScreen(7)">
         Continuar a la síntesis →
@@ -1679,8 +1777,7 @@ td textarea{
 </div>
 
 <!-- =====================================================
-     PANTALLA 8
-     SECCIÓN 9
+     PANTALLA 8 · SECCIÓN 9
 ===================================================== -->
 
 <div class="screen">
@@ -1789,12 +1886,14 @@ td textarea{
     <div class="navigation">
 
       <button
+        type="button"
         class="btn secondary"
         onclick="goScreen(6)">
         ← Anterior
       </button>
 
       <button
+        type="button"
         class="btn"
         onclick="goScreen(8)">
         Continuar →
@@ -1809,8 +1908,7 @@ td textarea{
 </div>
 
 <!-- =====================================================
-     PANTALLA 9
-     SECCIÓN 13
+     PANTALLA 9 · DECLARACIÓN IA
 ===================================================== -->
 
 <div class="screen">
@@ -1820,7 +1918,7 @@ td textarea{
   <div class="section-head">
 
     <small>
-      13
+      Declaración de uso de IA
     </small>
 
     <h2>
@@ -1886,12 +1984,14 @@ td textarea{
     <div class="navigation">
 
       <button
+        type="button"
         class="btn secondary"
         onclick="goScreen(7)">
         ← Anterior
       </button>
 
       <button
+        type="button"
         class="btn"
         onclick="goScreen(9)">
         Continuar a fuentes →
@@ -1906,8 +2006,7 @@ td textarea{
 </div>
 
 <!-- =====================================================
-     PANTALLA 10
-     SECCIÓN 14
+     PANTALLA 10 · FUENTES
 ===================================================== -->
 
 <div class="screen">
@@ -1917,7 +2016,7 @@ td textarea{
   <div class="section-head">
 
     <small>
-      14
+      Fuentes
     </small>
 
     <h2>
@@ -1932,14 +2031,15 @@ td textarea{
 
       <li>
         Material M1-S2 y 3: Estrategia de evaluación.
-        Diseño inverso, definición de evidencias, tareas auténticas,
-        técnicas e instrumentos.
+        Diseño inverso, definición de evidencias,
+        tareas auténticas, técnicas e instrumentos.
       </li>
 
       <li>
         Trabajo Final: Kit de Evaluación del Curso.
-        Ejemplo de articulación entre evidencia, tipo de tarea,
-        técnica, instrumento y tipo de evaluación.
+        Ejemplo de articulación entre evidencia,
+        tipo de tarea, técnica, instrumento
+        y tipo de evaluación.
       </li>
 
       <li>
@@ -1964,6 +2064,7 @@ td textarea{
       <div class="navigation">
 
         <button
+          type="button"
           class="btn secondary"
           onclick="goScreen(8)">
           ← Anterior
@@ -1972,18 +2073,21 @@ td textarea{
         <div class="navigation-right">
 
           <button
+            type="button"
             class="btn secondary"
             onclick="resetForm()">
             Reiniciar
           </button>
 
           <button
+            type="button"
             class="btn dark"
             onclick="downloadWord()">
             Descargar Word
           </button>
 
           <button
+            type="button"
             class="btn"
             onclick="downloadPDF()">
             Descargar PDF
@@ -2011,7 +2115,7 @@ td textarea{
 <script>
 
 /* =====================================================
-   PANTALLAS
+   NAVEGACIÓN
 ===================================================== */
 
 const screens =
@@ -2020,10 +2124,12 @@ const screens =
 function goScreen(index){
 
   screens.forEach((screen,i)=>{
+
     screen.classList.toggle(
       "active",
       i === index
     );
+
   });
 
   const percentage =
@@ -2585,7 +2691,7 @@ function renderFeedback(){
 }
 
 /* =====================================================
-   GUARDADO
+   HELPERS
 ===================================================== */
 
 function allFields(){
@@ -2598,90 +2704,6 @@ function allFields(){
 
 }
 
-function saveState(){
-
-  const state = {};
-
-  allFields().forEach(field=>{
-
-    if(!field.id){
-      return;
-    }
-
-    if(field.type === "checkbox"){
-      state[field.id] =
-        field.checked;
-    }else{
-      state[field.id] =
-        field.value;
-    }
-
-  });
-
-  try{
-
-    localStorage.setItem(
-      "sise-aa2-mix-v2",
-      JSON.stringify(state)
-    );
-
-  }catch(error){}
-
-}
-
-function loadState(){
-
-  try{
-
-    const raw =
-      localStorage.getItem(
-        "sise-aa2-mix-v2"
-      );
-
-    if(!raw){
-      return;
-    }
-
-    const state =
-      JSON.parse(raw);
-
-    Object.keys(state).forEach(id=>{
-
-      const field =
-        document.getElementById(id);
-
-      if(!field){
-        return;
-      }
-
-      if(field.type === "checkbox"){
-        field.checked =
-          !!state[id];
-      }else{
-        field.value =
-          state[id] || "";
-      }
-
-    });
-
-  }catch(error){}
-
-}
-
-document.addEventListener(
-  "input",
-  saveState
-);
-
-document.addEventListener(
-  "change",
-  saveState
-);
-
-/* =====================================================
-   HELPERS
-===================================================== */
-
 function value(id){
 
   const element =
@@ -2693,10 +2715,41 @@ function value(id){
 
 }
 
+function checked(id){
+
+  const element =
+    document.getElementById(id);
+
+  return !!(
+    element &&
+    element.checked
+  );
+
+}
+
 function safeText(text){
 
   return String(text || "").trim()
     || "Sin completar";
+
+}
+
+function cleanFilename(text){
+
+  return String(text || "curso")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^a-zA-Z0-9]+/g,"_")
+    .replace(/^_+|_+$/g,"")
+    .toLowerCase();
+
+}
+
+function fileName(){
+
+  return cleanFilename(
+    value("curso") || "curso"
+  );
 
 }
 
@@ -2721,6 +2774,98 @@ function showStatus(message){
 }
 
 /* =====================================================
+   GUARDADO
+===================================================== */
+
+function saveState(){
+
+  const state = {};
+
+  allFields().forEach(field=>{
+
+    if(!field.id){
+      return;
+    }
+
+    if(field.type === "checkbox"){
+
+      state[field.id] =
+        field.checked;
+
+    }else{
+
+      state[field.id] =
+        field.value;
+
+    }
+
+  });
+
+  try{
+
+    localStorage.setItem(
+      "sise-aa2-mix-coevaluacion",
+      JSON.stringify(state)
+    );
+
+  }catch(error){}
+
+}
+
+function loadState(){
+
+  try{
+
+    const raw =
+      localStorage.getItem(
+        "sise-aa2-mix-coevaluacion"
+      );
+
+    if(!raw){
+      return;
+    }
+
+    const state =
+      JSON.parse(raw);
+
+    Object.keys(state).forEach(id=>{
+
+      const field =
+        document.getElementById(id);
+
+      if(!field){
+        return;
+      }
+
+      if(field.type === "checkbox"){
+
+        field.checked =
+          !!state[id];
+
+      }else{
+
+        field.value =
+          state[id] || "";
+
+      }
+
+    });
+
+  }catch(error){}
+
+}
+
+document.addEventListener(
+  "input",
+  saveState
+);
+
+document.addEventListener(
+  "change",
+  saveState
+);
+
+/* =====================================================
    REINICIAR
 ===================================================== */
 
@@ -2738,35 +2883,46 @@ function resetForm(){
   allFields().forEach(field=>{
 
     if(field.id === "codigo"){
+
       field.value = "AA2";
       return;
+
     }
 
     if(
       field.id ===
       "productoEsperado"
     ){
+
       field.value =
         "Mapa de mix de evaluación auténtica";
+
       return;
+
     }
 
     if(
       field.type ===
       "checkbox"
     ){
+
       field.checked = false;
+
     }
 
     else if(
       field.tagName ===
       "SELECT"
     ){
+
       field.selectedIndex = 0;
+
     }
 
     else{
+
       field.value = "";
+
     }
 
   });
@@ -2774,12 +2930,105 @@ function resetForm(){
   try{
 
     localStorage.removeItem(
-      "sise-aa2-mix-v2"
+      "sise-aa2-mix-coevaluacion"
     );
 
   }catch(error){}
 
   goScreen(0);
+
+}
+
+/* =====================================================
+   DATOS PARA EXPORTAR
+===================================================== */
+
+function evidenceData(){
+
+  return evidenceRows.map(row=>[
+    row.tipo,
+    value(row.id+"_producto"),
+    value(row.id+"_demuestra"),
+    value(row.id+"_momento"),
+    value(row.id+"_relacion"),
+    value(row.id+"_feedback")
+  ]);
+
+}
+
+function criteriaData(){
+
+  const rows = [];
+
+  for(let i=1;i<=6;i++){
+
+    rows.push([
+
+      value(`criterio_${i}`),
+
+      checked(`criterio_${i}_principal`)
+        ? "Sí"
+        : "No",
+
+      checked(`criterio_${i}_sec1`)
+        ? "Sí"
+        : "No",
+
+      checked(`criterio_${i}_sec2`)
+        ? "Sí"
+        : "No",
+
+      checked(`criterio_${i}_sec3`)
+        ? "Sí"
+        : "No",
+
+      value(`criterio_${i}_obs`)
+
+    ]);
+
+  }
+
+  return rows;
+
+}
+
+function mixData(){
+
+  return mixRows.map(row=>[
+    row.momento,
+    value(row.id+"_evidencia"),
+    value(row.id+"_tarea"),
+    value(row.id+"_mix"),
+    value(row.id+"_tecnica"),
+    value(row.id+"_instrumento"),
+    value(row.id+"_ia"),
+    value(row.id+"_feedback")
+  ]);
+
+}
+
+function iaData(){
+
+  return iaRows.map(row=>[
+    row.herramienta,
+    value(row.id+"_uso"),
+    value(row.id+"_prompt"),
+    value(row.id+"_validacion"),
+    value(row.id+"_riesgo"),
+    value(row.id+"_evidencia")
+  ]);
+
+}
+
+function feedbackData(){
+
+  return feedbackRows.map(row=>[
+    row.momento,
+    value(row.id+"_que"),
+    value(row.id+"_quien"),
+    value(row.id+"_como"),
+    value(row.id+"_decision")
+  ]);
 
 }
 
@@ -2815,17 +3064,51 @@ async function downloadWord(){
     PageOrientation
   } = window.docx;
 
-  const RED =
-    "FF0E49";
+  const RED = "FF0E49";
+  const DARK = "241F21";
+  const GRAY = "F4F2F3";
+  const PINK = "FFF1F5";
+  const BORDER = "DDD5D8";
 
-  const DARK =
-    "241F21";
+  const borders = {
 
-  const GRAY =
-    "F4F2F3";
+    top:{
+      style:BorderStyle.SINGLE,
+      size:1,
+      color:BORDER
+    },
 
-  const BORDER =
-    "DDD5D8";
+    bottom:{
+      style:BorderStyle.SINGLE,
+      size:1,
+      color:BORDER
+    },
+
+    left:{
+      style:BorderStyle.SINGLE,
+      size:1,
+      color:BORDER
+    },
+
+    right:{
+      style:BorderStyle.SINGLE,
+      size:1,
+      color:BORDER
+    },
+
+    insideHorizontal:{
+      style:BorderStyle.SINGLE,
+      size:1,
+      color:BORDER
+    },
+
+    insideVertical:{
+      style:BorderStyle.SINGLE,
+      size:1,
+      color:BORDER
+    }
+
+  };
 
   function para(
     text,
@@ -2888,7 +3171,50 @@ async function downloadWord(){
 
   }
 
-  function twoCellRow(
+  function normalCell(
+    text,
+    options={}
+  ){
+
+    return new TableCell({
+
+      shading:
+        options.fill
+          ? {
+              type:ShadingType.CLEAR,
+              fill:options.fill
+            }
+          : undefined,
+
+      margins:{
+        top:90,
+        bottom:90,
+        left:85,
+        right:85
+      },
+
+      children:[
+
+        para(
+          safeText(text),
+          {
+            bold:
+              !!options.bold,
+            size:
+              options.size || 16,
+            color:
+              options.color || DARK,
+            after:0
+          }
+        )
+
+      ]
+
+    });
+
+  }
+
+  function basicRow(
     label,
     answer
   ){
@@ -2897,51 +3223,17 @@ async function downloadWord(){
 
       children:[
 
-        new TableCell({
-
-          shading:{
-            type:ShadingType.CLEAR,
+        normalCell(
+          label,
+          {
+            bold:true,
             fill:GRAY
-          },
+          }
+        ),
 
-          margins:{
-            top:100,
-            bottom:100,
-            left:100,
-            right:100
-          },
-
-          children:[
-            para(
-              label,
-              {
-                bold:true,
-                after:0
-              }
-            )
-          ]
-
-        }),
-
-        new TableCell({
-
-          margins:{
-            top:100,
-            bottom:100,
-            left:100,
-            right:100
-          },
-
-          children:[
-            para(
-              safeText(answer),
-              {
-                after:0
-              }
-            )
-          ]
-
-        })
+        normalCell(
+          answer
+        )
 
       ]
 
@@ -2949,45 +3241,66 @@ async function downloadWord(){
 
   }
 
-  const borders = {
+  function headerCell(text){
 
-    top:{
-      style:BorderStyle.SINGLE,
-      size:1,
-      color:BORDER
-    },
+    return normalCell(
+      text,
+      {
+        bold:true,
+        fill:RED,
+        color:"FFFFFF",
+        size:14
+      }
+    );
 
-    bottom:{
-      style:BorderStyle.SINGLE,
-      size:1,
-      color:BORDER
-    },
+  }
 
-    left:{
-      style:BorderStyle.SINGLE,
-      size:1,
-      color:BORDER
-    },
+  function simpleTable(
+    headers,
+    rows
+  ){
 
-    right:{
-      style:BorderStyle.SINGLE,
-      size:1,
-      color:BORDER
-    },
+    return new Table({
 
-    insideHorizontal:{
-      style:BorderStyle.SINGLE,
-      size:1,
-      color:BORDER
-    },
+      width:{
+        size:100,
+        type:WidthType.PERCENTAGE
+      },
 
-    insideVertical:{
-      style:BorderStyle.SINGLE,
-      size:1,
-      color:BORDER
-    }
+      borders,
 
-  };
+      rows:[
+
+        new TableRow({
+
+          tableHeader:true,
+
+          children:
+            headers.map(
+              header =>
+                headerCell(header)
+            )
+
+        }),
+
+        ...rows.map(
+          row =>
+            new TableRow({
+
+              children:
+                row.map(
+                  cell =>
+                    normalCell(cell)
+                )
+
+            })
+        )
+
+      ]
+
+    });
+
+  }
 
   const generalTable =
     new Table({
@@ -3001,62 +3314,62 @@ async function downloadWord(){
 
       rows:[
 
-        twoCellRow(
+        basicRow(
           "Docente participante",
           value("docente")
         ),
 
-        twoCellRow(
+        basicRow(
           "SISE carreras / SISE formación continua",
           value("unidadNegocio")
         ),
 
-        twoCellRow(
+        basicRow(
           "Curso que rediseña",
           value("curso")
         ),
 
-        twoCellRow(
+        basicRow(
           "Programa / carrera",
           value("programa")
         ),
 
-        twoCellRow(
+        basicRow(
           "Unidad o sesión del curso",
           value("unidadCurso")
         ),
 
-        twoCellRow(
+        basicRow(
           "Fecha de entrega",
           value("fecha")
         ),
 
-        twoCellRow(
+        basicRow(
           "Evidencia diagnosticada en AA1",
           value("evidenciaAA1")
         ),
 
-        twoCellRow(
+        basicRow(
           "Código de evidencia",
           "AA2"
         ),
 
-        twoCellRow(
+        basicRow(
           "Resultado de aprendizaje del curso",
           value("resultadoCurso")
         ),
 
-        twoCellRow(
+        basicRow(
           "Modalidad de aplicación",
           value("modalidad")
         ),
 
-        twoCellRow(
+        basicRow(
           "Herramientas IA/TIC previstas",
           value("herramientasPrevistas")
         ),
 
-        twoCellRow(
+        basicRow(
           "Producto final esperado",
           value("productoEsperado")
         )
@@ -3077,42 +3390,42 @@ async function downloadWord(){
 
       rows:[
 
-        twoCellRow(
+        basicRow(
           "Resultado de aprendizaje priorizado",
           value("p1_resultado")
         ),
 
-        twoCellRow(
+        basicRow(
           "Competencia o capacidad vinculada",
           value("p1_competencia")
         ),
 
-        twoCellRow(
+        basicRow(
           "Problema de desempeño detectado en AA1",
           value("p1_problema")
         ),
 
-        twoCellRow(
+        basicRow(
           "Meta de desempeño",
           value("p1_meta")
         ),
 
-        twoCellRow(
+        basicRow(
           "Reto auténtico",
           value("p1_reto")
         ),
 
-        twoCellRow(
+        basicRow(
           "Rol del estudiante",
           value("p1_rol")
         ),
 
-        twoCellRow(
+        basicRow(
           "Audiencia o destinatario",
           value("p1_audiencia")
         ),
 
-        twoCellRow(
+        basicRow(
           "Condiciones de desempeño",
           value("p1_condiciones")
         )
@@ -3133,27 +3446,27 @@ async function downloadWord(){
 
       rows:[
 
-        twoCellRow(
+        basicRow(
           "¿Qué cambia respecto a la evidencia diagnosticada en AA1?",
           value("sintesis1")
         ),
 
-        twoCellRow(
+        basicRow(
           "¿Por qué el nuevo diseño es más auténtico?",
           value("sintesis2")
         ),
 
-        twoCellRow(
+        basicRow(
           "¿Cómo se equilibra evaluación diagnóstica, formativa, sumativa y como aprendizaje?",
           value("sintesis3")
         ),
 
-        twoCellRow(
+        basicRow(
           "¿Qué decisiones pedagógicas se tomarán con los resultados?",
           value("sintesis4")
         ),
 
-        twoCellRow(
+        basicRow(
           "¿Qué cuidados éticos se aplicarán en el uso de IA/TIC?",
           value("sintesis5")
         )
@@ -3174,21 +3487,21 @@ async function downloadWord(){
 
       rows:[
 
-        twoCellRow(
+        basicRow(
           "Herramientas utilizadas",
           value(
             "iaDeclaracionHerramientas"
           )
         ),
 
-        twoCellRow(
+        basicRow(
           "Propósito del uso",
           value(
             "iaDeclaracionProposito"
           )
         ),
 
-        twoCellRow(
+        basicRow(
           "Prompts o instrucciones",
           value(
             "iaDeclaracionPrompts"
@@ -3199,136 +3512,334 @@ async function downloadWord(){
 
     });
 
+  const coevaluationTable =
+    new Table({
+
+      width:{
+        size:100,
+        type:WidthType.PERCENTAGE
+      },
+
+      borders,
+
+      rows:[
+
+        new TableRow({
+
+          children:[
+
+            new TableCell({
+
+              shading:{
+                type:ShadingType.CLEAR,
+                fill:PINK
+              },
+
+              margins:{
+                top:150,
+                bottom:150,
+                left:150,
+                right:150
+              },
+
+              children:[
+
+                para(
+                  "MODALIDAD DE EVALUACIÓN · COEVALUACIÓN",
+                  {
+                    bold:true,
+                    color:RED,
+                    size:20,
+                    after:70
+                  }
+                ),
+
+                para(
+                  "Esta actividad se desarrolla mediante coevaluación. Completa tu Mapa de Mix de Evaluación de manera individual y, al finalizar, compártelo con un compañero para recibir una valoración externa sobre la coherencia de tu propuesta. Del mismo modo, revisarás el trabajo de un compañero considerando la articulación entre resultado de aprendizaje, reto auténtico, evidencias, criterios, tipos de evaluación, retroalimentación y uso responsable de IA y TIC.",
+                  {
+                    size:18,
+                    after:0
+                  }
+                )
+
+              ]
+
+            })
+
+          ]
+
+        })
+
+      ]
+
+    });
+
+  const evidenceTable =
+    simpleTable(
+      [
+        "Tipo de evidencia",
+        "Producto o desempeño",
+        "Qué demuestra",
+        "Momento de uso",
+        "Relación con el reto",
+        "Retroalimentación prevista"
+      ],
+      evidenceData()
+    );
+
+  const criteriaTable =
+    simpleTable(
+      [
+        "Criterio preliminar",
+        "Evidencia principal",
+        "Secundaria 1",
+        "Secundaria 2",
+        "Secundaria 3",
+        "Observación"
+      ],
+      criteriaData()
+    );
+
+  const mixTable =
+    simpleTable(
+      [
+        "Momento",
+        "Evidencia",
+        "Tarea auténtica",
+        "Mix de evaluación",
+        "Técnica",
+        "Instrumento",
+        "IA/TIC",
+        "Retroalimentación"
+      ],
+      mixData()
+    );
+
+  const iaTable =
+    simpleTable(
+      [
+        "Herramienta",
+        "Uso pedagógico",
+        "Prompt",
+        "Validación docente",
+        "Riesgo ético",
+        "Evidencia de uso"
+      ],
+      iaData()
+    );
+
+  const feedbackTable =
+    simpleTable(
+      [
+        "Momento",
+        "Qué se retroalimenta",
+        "Quién retroalimenta",
+        "Cómo se entrega",
+        "Decisión posterior"
+      ],
+      feedbackData()
+    );
+
   const doc =
     new Document({
 
-      sections:[{
+      sections:[
 
-        children:[
+        {
 
-          para(
-            "FORMATO DE EVIDENCIA DE APRENDIZAJE",
-            {
-              bold:true,
-              align:AlignmentType.CENTER,
-              size:21
+          children:[
+
+            para(
+              "FORMATO DE EVIDENCIA DE APRENDIZAJE",
+              {
+                bold:true,
+                align:AlignmentType.CENTER,
+                size:21
+              }
+            ),
+
+            para(
+              "AA2 - Mapa de Mix de Evaluación para el Diseño de una Evaluación Auténtica",
+              {
+                bold:true,
+                color:RED,
+                align:AlignmentType.CENTER,
+                size:31,
+                after:80
+              }
+            ),
+
+            para(
+              "Curso: Diseño de Evaluaciones Auténticas y por Competencias",
+              {
+                bold:true,
+                align:AlignmentType.CENTER,
+                size:20,
+                after:60
+              }
+            ),
+
+            para(
+              "Tiempo estimado: 60 minutos",
+              {
+                bold:true,
+                color:RED,
+                align:AlignmentType.CENTER,
+                size:19,
+                after:180
+              }
+            ),
+
+            para(
+              "PROPÓSITO DE AA2",
+              {
+                bold:true,
+                color:RED,
+                size:20,
+                after:40
+              }
+            ),
+
+            para(
+              "Diseñar un mapa de mix de evaluación que articule resultado de aprendizaje, reto auténtico, evidencias, criterios preliminares, tipos de evaluación, técnicas, instrumentos, retroalimentación y uso responsable de IA y TIC. Este formato convierte el diagnóstico AA1 en una propuesta de evaluación auténtica aplicable a un curso real.",
+              {
+                after:160
+              }
+            ),
+
+            coevaluationTable,
+
+            title(
+              "1",
+              "Datos generales del participante y del curso"
+            ),
+
+            generalTable,
+
+            title(
+              "2",
+              "Orientación pedagógica del formato"
+            ),
+
+            para(
+              "Diseño inverso: parte del resultado esperado y pregunta qué evidencia es suficiente para demostrar el aprendizaje."
+            ),
+
+            para(
+              "Mix de evaluación: combina tipos de evaluación según propósito, actor, temporalidad y método."
+            ),
+
+            para(
+              "IA y TIC responsables: usa IA y TIC como apoyo pedagógico; la decisión final y validación corresponden al docente."
+            ),
+
+            title(
+              "3",
+              "Diseño inverso - resultado, desempeño y reto"
+            ),
+
+            designInverse,
+
+            title(
+              "4",
+              "Evidencias de aprendizaje suficientes"
+            ),
+
+            evidenceTable,
+
+            title(
+              "5",
+              "Matriz de consistencia entre criterios y evidencias"
+            ),
+
+            criteriaTable
+
+          ]
+
+        },
+
+        {
+
+          properties:{
+
+            page:{
+
+              size:{
+                orientation:
+                  PageOrientation.LANDSCAPE
+              }
+
             }
-          ),
 
-          para(
-            "AA2 - Mapa de Mix de Evaluación para el Diseño de una Evaluación Auténtica",
-            {
-              bold:true,
-              color:RED,
-              align:AlignmentType.CENTER,
-              size:31,
-              after:100
-            }
-          ),
+          },
 
-          para(
-            "Curso: Diseño de Evaluaciones Auténticas y por Competencias",
-            {
-              bold:true,
-              align:AlignmentType.CENTER,
-              size:21,
-              after:80
-            }
-          ),
+          children:[
 
-          para(
-            "Tiempo estimado: 60 minutos",
-            {
-              bold:true,
-              color:RED,
-              align:AlignmentType.CENTER,
-              size:19,
-              after:220
-            }
-          ),
+            title(
+              "6",
+              "Mapa de Mix de Evaluación"
+            ),
 
-          para(
-            "PROPÓSITO DE AA2",
-            {
-              bold:true,
-              color:RED,
-              size:20,
-              after:40
-            }
-          ),
+            mixTable,
 
-          para(
-            "Diseñar un mapa de mix de evaluación que articule resultado de aprendizaje, reto auténtico, evidencias, criterios preliminares, tipos de evaluación, técnicas, instrumentos, retroalimentación y uso responsable de IA y TIC. Este formato convierte el diagnóstico AA1 en una propuesta de evaluación auténtica aplicable a un curso real.",
-            {
-              after:180
-            }
-          ),
+            title(
+              "7",
+              "Integración responsable de IA y TIC"
+            ),
 
-          title(
-            "1",
-            "Datos generales del participante y del curso"
-          ),
+            iaTable,
 
-          generalTable,
+            title(
+              "8",
+              "Plan de retroalimentación y decisiones"
+            ),
 
-          title(
-            "2",
-            "Orientación pedagógica del formato"
-          ),
+            feedbackTable
 
-          para(
-            "Diseño inverso: Parte del resultado esperado y pregunta qué evidencia es suficiente para demostrar el aprendizaje."
-          ),
+          ]
 
-          para(
-            "Mix de evaluación: Combina tipos de evaluación según propósito, actor, temporalidad y método."
-          ),
+        },
 
-          para(
-            "IA y TIC responsables: Usa IA y TIC como apoyo pedagógico. La decisión final y validación corresponden al docente."
-          ),
+        {
 
-          title(
-            "3",
-            "Paso 1: Diseño inverso - resultado, desempeño y reto"
-          ),
+          children:[
 
-          designInverse,
+            title(
+              "9",
+              "Síntesis final del diseño AA2"
+            ),
 
-          title(
-            "9",
-            "Síntesis final del diseño AA2"
-          ),
+            synthesisTable,
 
-          synthesisTable,
+            title(
+              "",
+              "Declaración breve de uso de IA en AA2"
+            ),
 
-          title(
-            "13",
-            "Declaración breve de uso de IA en AA2"
-          ),
+            iaDeclaration,
 
-          iaDeclaration,
+            title(
+              "",
+              "Fuentes de apoyo para el formato"
+            ),
 
-          title(
-            "14",
-            "Fuentes de apoyo para el formato"
-          ),
+            para(
+              "Material M1-S2 y 3: Estrategia de evaluación. Diseño inverso, definición de evidencias, tareas auténticas, técnicas e instrumentos."
+            ),
 
-          para(
-            "Material M1-S2 y 3: Estrategia de evaluación. Diseño inverso, definición de evidencias, tareas auténticas, técnicas e instrumentos."
-          ),
+            para(
+              "Trabajo Final: Kit de Evaluación del Curso. Ejemplo de articulación entre evidencia, tipo de tarea, técnica, instrumento y tipo de evaluación."
+            ),
 
-          para(
-            "Trabajo Final: Kit de Evaluación del Curso. Ejemplo de articulación entre evidencia, tipo de tarea, técnica, instrumento y tipo de evaluación."
-          ),
+            para(
+              "Lineamiento SISE de uso de Inteligencia Artificial para docentes y estudiantes. Principios de transparencia, veracidad, privacidad, responsabilidad y supervisión humana."
+            )
 
-          para(
-            "Lineamiento SISE de uso de Inteligencia Artificial para docentes y estudiantes. Principios de transparencia, veracidad, privacidad, responsabilidad y supervisión humana."
-          )
+          ]
 
-        ]
+        }
 
-      }]
+      ]
 
     });
 
@@ -3347,7 +3858,7 @@ async function downloadWord(){
       url;
 
     link.download =
-      "AA2_mapa_mix_evaluacion.docx";
+      `AA2_mapa_mix_${fileName()}.docx`;
 
     document.body.appendChild(link);
 
@@ -3410,51 +3921,119 @@ function downloadPDF(){
   const DARK =
     [36,31,33];
 
-  pdf.setFillColor(
-    DARK[0],
-    DARK[1],
-    DARK[2]
-  );
+  const GRAY =
+    [244,242,243];
 
-  pdf.rect(
-    0,
-    0,
-    297,
-    40,
-    "F"
-  );
+  const PINK =
+    [255,241,245];
 
-  pdf.setFillColor(
-    RED[0],
-    RED[1],
-    RED[2]
-  );
+  function header(
+    title,
+    subtitle=""
+  ){
 
-  pdf.rect(
-    0,
-    0,
-    297,
-    4,
-    "F"
+    pdf.setFillColor(...DARK);
+
+    pdf.rect(
+      0,
+      0,
+      297,
+      36,
+      "F"
+    );
+
+    pdf.setFillColor(...RED);
+
+    pdf.rect(
+      0,
+      0,
+      297,
+      4,
+      "F"
+    );
+
+    pdf.setTextColor(
+      255,
+      255,
+      255
+    );
+
+    pdf.setFont(
+      "helvetica",
+      "bold"
+    );
+
+    pdf.setFontSize(16);
+
+    pdf.text(
+      title,
+      14,
+      17
+    );
+
+    if(subtitle){
+
+      pdf.setFont(
+        "helvetica",
+        "normal"
+      );
+
+      pdf.setFontSize(8.5);
+
+      pdf.setTextColor(
+        240,
+        230,
+        234
+      );
+
+      pdf.text(
+        pdf.splitTextToSize(
+          subtitle,
+          265
+        ),
+        14,
+        24
+      );
+
+    }
+
+  }
+
+  function title(
+    text,
+    y
+  ){
+
+    pdf.setTextColor(...RED);
+
+    pdf.setFont(
+      "helvetica",
+      "bold"
+    );
+
+    pdf.setFontSize(12);
+
+    pdf.text(
+      text,
+      14,
+      y
+    );
+
+  }
+
+  /* =====================================
+     PORTADA
+  ===================================== */
+
+  header(
+    "AA2 · Mapa de Mix de Evaluación Auténtica",
+    "Diseño de Evaluaciones Auténticas y por Competencias · Tiempo estimado: 60 minutos"
   );
 
   pdf.setTextColor(
-    255,
-    255,
-    255
-  );
-
-  pdf.setFont(
-    "helvetica",
-    "bold"
-  );
-
-  pdf.setFontSize(17);
-
-  pdf.text(
-    "AA2 · Mapa de Mix de Evaluación Auténtica",
-    14,
-    17
+    70,
+    64,
+    67
   );
 
   pdf.setFont(
@@ -3462,179 +4041,695 @@ function downloadPDF(){
     "normal"
   );
 
-  pdf.setFontSize(9);
+  pdf.setFontSize(8.5);
+
+  const purpose =
+    pdf.splitTextToSize(
+      "Propósito: Diseñar un mapa de mix de evaluación que articule resultado de aprendizaje, reto auténtico, evidencias, criterios preliminares, tipos de evaluación, técnicas, instrumentos, retroalimentación y uso responsable de IA y TIC.",
+      265
+    );
 
   pdf.text(
-    "Diseño de Evaluaciones Auténticas y por Competencias · Tiempo estimado: 60 minutos",
+    purpose,
     14,
-    26
+    46
+  );
+
+  pdf.setFillColor(...PINK);
+
+  pdf.roundedRect(
+    14,
+    58,
+    269,
+    31,
+    3,
+    3,
+    "F"
+  );
+
+  pdf.setFillColor(...RED);
+
+  pdf.rect(
+    14,
+    58,
+    3,
+    31,
+    "F"
+  );
+
+  pdf.setTextColor(...RED);
+
+  pdf.setFont(
+    "helvetica",
+    "bold"
+  );
+
+  pdf.setFontSize(9.5);
+
+  pdf.text(
+    "MODALIDAD DE EVALUACIÓN · COEVALUACIÓN",
+    21,
+    66
   );
 
   pdf.setTextColor(
-    60,
-    55,
-    57
+    75,
+    68,
+    71
   );
 
-  pdf.setFontSize(9);
+  pdf.setFont(
+    "helvetica",
+    "normal"
+  );
 
-  let y = 50;
+  pdf.setFontSize(7.8);
 
-  const items = [
+  const coevaluationText =
+    pdf.splitTextToSize(
+      "Esta actividad se desarrolla mediante coevaluación. Completa tu Mapa de Mix de Evaluación de manera individual y, al finalizar, compártelo con un compañero para recibir una valoración externa. Del mismo modo, revisarás el trabajo de un compañero considerando la coherencia entre resultado, reto, evidencias, criterios, tipos de evaluación, retroalimentación y uso responsable de IA/TIC.",
+      250
+    );
 
-    [
-      "Docente participante",
-      value("docente")
-    ],
+  pdf.text(
+    coevaluationText,
+    21,
+    72
+  );
 
-    [
-      "Curso que rediseña",
-      value("curso")
-    ],
+  title(
+    "1. Datos generales del participante y del curso",
+    101
+  );
 
-    [
-      "Programa / carrera",
-      value("programa")
-    ],
+  pdf.autoTable({
 
-    [
-      "Resultado de aprendizaje",
-      value("resultadoCurso")
-    ],
+    startY:106,
 
-    [
-      "Problema detectado en AA1",
-      value("p1_problema")
-    ],
+    margin:{
+      left:14,
+      right:14
+    },
 
-    [
-      "Meta de desempeño",
-      value("p1_meta")
-    ],
+    theme:"grid",
 
-    [
-      "Reto auténtico",
-      value("p1_reto")
-    ],
+    styles:{
+      fontSize:8,
+      cellPadding:2.2,
+      valign:"top",
+      overflow:"linebreak"
+    },
 
-    [
-      "Rol del estudiante",
-      value("p1_rol")
-    ],
+    columnStyles:{
 
-    [
-      "Audiencia o destinatario",
-      value("p1_audiencia")
-    ],
+      0:{
+        cellWidth:65,
+        fontStyle:"bold",
+        fillColor:GRAY
+      }
 
-    [
-      "Condiciones de desempeño",
-      value("p1_condiciones")
-    ],
+    },
 
-    [
-      "Cambios respecto a AA1",
-      value("sintesis1")
-    ],
+    body:[
 
-    [
-      "Por qué el nuevo diseño es más auténtico",
-      value("sintesis2")
-    ],
+      [
+        "Docente participante",
+        safeText(value("docente"))
+      ],
 
-    [
-      "Equilibrio del mix",
-      value("sintesis3")
-    ],
+      [
+        "SISE carreras / SISE formación continua",
+        safeText(value("unidadNegocio"))
+      ],
 
-    [
-      "Decisiones pedagógicas",
-      value("sintesis4")
-    ],
+      [
+        "Curso que rediseña",
+        safeText(value("curso"))
+      ],
 
-    [
-      "Cuidados éticos IA/TIC",
-      value("sintesis5")
-    ],
+      [
+        "Programa / carrera",
+        safeText(value("programa"))
+      ],
 
-    [
-      "Herramientas de IA utilizadas",
-      value(
-        "iaDeclaracionHerramientas"
-      )
-    ],
+      [
+        "Unidad o sesión del curso",
+        safeText(value("unidadCurso"))
+      ],
 
-    [
-      "Propósito del uso de IA",
-      value(
-        "iaDeclaracionProposito"
-      )
-    ],
+      [
+        "Fecha de entrega",
+        safeText(value("fecha"))
+      ],
 
-    [
-      "Prompts o instrucciones",
-      value(
-        "iaDeclaracionPrompts"
-      )
+      [
+        "Evidencia diagnosticada en AA1",
+        safeText(value("evidenciaAA1"))
+      ],
+
+      [
+        "Resultado de aprendizaje del curso",
+        safeText(value("resultadoCurso"))
+      ],
+
+      [
+        "Modalidad de aplicación",
+        safeText(value("modalidad"))
+      ],
+
+      [
+        "Herramientas IA/TIC previstas",
+        safeText(value("herramientasPrevistas"))
+      ]
+
     ]
+
+  });
+
+  /* =====================================
+     DISEÑO INVERSO
+  ===================================== */
+
+  pdf.addPage();
+
+  header(
+    "3. Diseño inverso - resultado, desempeño y reto"
+  );
+
+  pdf.autoTable({
+
+    startY:44,
+
+    margin:{
+      left:14,
+      right:14
+    },
+
+    theme:"grid",
+
+    styles:{
+      fontSize:8.5,
+      cellPadding:3,
+      valign:"top",
+      overflow:"linebreak"
+    },
+
+    columnStyles:{
+      0:{
+        cellWidth:70,
+        fontStyle:"bold",
+        fillColor:GRAY
+      }
+    },
+
+    body:[
+
+      [
+        "Resultado de aprendizaje priorizado",
+        safeText(value("p1_resultado"))
+      ],
+
+      [
+        "Competencia o capacidad vinculada",
+        safeText(value("p1_competencia"))
+      ],
+
+      [
+        "Problema de desempeño detectado en AA1",
+        safeText(value("p1_problema"))
+      ],
+
+      [
+        "Meta de desempeño",
+        safeText(value("p1_meta"))
+      ],
+
+      [
+        "Reto auténtico",
+        safeText(value("p1_reto"))
+      ],
+
+      [
+        "Rol del estudiante",
+        safeText(value("p1_rol"))
+      ],
+
+      [
+        "Audiencia o destinatario",
+        safeText(value("p1_audiencia"))
+      ],
+
+      [
+        "Condiciones de desempeño",
+        safeText(value("p1_condiciones"))
+      ]
+
+    ]
+
+  });
+
+  /* =====================================
+     EVIDENCIAS
+  ===================================== */
+
+  pdf.addPage();
+
+  header(
+    "4. Evidencias de aprendizaje suficientes"
+  );
+
+  pdf.autoTable({
+
+    startY:44,
+
+    margin:{
+      left:6,
+      right:6
+    },
+
+    theme:"grid",
+
+    head:[[
+      "Tipo de evidencia",
+      "Producto o desempeño",
+      "Qué demuestra",
+      "Momento",
+      "Relación con reto",
+      "Retroalimentación"
+    ]],
+
+    body:
+      evidenceData().map(
+        row =>
+          row.map(safeText)
+      ),
+
+    headStyles:{
+      fillColor:RED,
+      textColor:[255,255,255],
+      fontStyle:"bold",
+      fontSize:7
+    },
+
+    bodyStyles:{
+      fontSize:7,
+      cellPadding:2,
+      valign:"top"
+    }
+
+  });
+
+  /* =====================================
+     CRITERIOS
+  ===================================== */
+
+  pdf.addPage();
+
+  header(
+    "5. Matriz de consistencia entre criterios y evidencias"
+  );
+
+  pdf.autoTable({
+
+    startY:44,
+
+    margin:{
+      left:8,
+      right:8
+    },
+
+    theme:"grid",
+
+    head:[[
+      "Criterio",
+      "Principal",
+      "Sec. 1",
+      "Sec. 2",
+      "Sec. 3",
+      "Observación"
+    ]],
+
+    body:
+      criteriaData().map(
+        row =>
+          row.map(safeText)
+      ),
+
+    headStyles:{
+      fillColor:RED,
+      textColor:[255,255,255],
+      fontStyle:"bold",
+      fontSize:7.4
+    },
+
+    bodyStyles:{
+      fontSize:7.4,
+      cellPadding:2
+    }
+
+  });
+
+  /* =====================================
+     MIX
+  ===================================== */
+
+  pdf.addPage();
+
+  header(
+    "6. Mapa de Mix de Evaluación"
+  );
+
+  pdf.autoTable({
+
+    startY:44,
+
+    margin:{
+      left:4,
+      right:4
+    },
+
+    theme:"grid",
+
+    head:[[
+      "Momento",
+      "Evidencia",
+      "Tarea",
+      "Mix",
+      "Técnica",
+      "Instrumento",
+      "IA/TIC",
+      "Retroalimentación"
+    ]],
+
+    body:
+      mixData().map(
+        row =>
+          row.map(safeText)
+      ),
+
+    headStyles:{
+      fillColor:RED,
+      textColor:[255,255,255],
+      fontStyle:"bold",
+      fontSize:6.5
+    },
+
+    bodyStyles:{
+      fontSize:6.2,
+      cellPadding:1.5,
+      valign:"top"
+    }
+
+  });
+
+  /* =====================================
+     IA / TIC
+  ===================================== */
+
+  pdf.addPage();
+
+  header(
+    "7. Integración responsable de IA y TIC"
+  );
+
+  pdf.autoTable({
+
+    startY:44,
+
+    margin:{
+      left:5,
+      right:5
+    },
+
+    theme:"grid",
+
+    head:[[
+      "Herramienta",
+      "Uso pedagógico",
+      "Prompt",
+      "Validación",
+      "Riesgo ético",
+      "Evidencia"
+    ]],
+
+    body:
+      iaData().map(
+        row =>
+          row.map(safeText)
+      ),
+
+    headStyles:{
+      fillColor:RED,
+      textColor:[255,255,255],
+      fontStyle:"bold",
+      fontSize:7
+    },
+
+    bodyStyles:{
+      fontSize:6.7,
+      cellPadding:1.8,
+      valign:"top"
+    }
+
+  });
+
+  /* =====================================
+     RETROALIMENTACIÓN
+  ===================================== */
+
+  pdf.addPage();
+
+  header(
+    "8. Plan de retroalimentación y decisiones"
+  );
+
+  pdf.autoTable({
+
+    startY:44,
+
+    margin:{
+      left:8,
+      right:8
+    },
+
+    theme:"grid",
+
+    head:[[
+      "Momento",
+      "Qué se retroalimenta",
+      "Quién",
+      "Cómo",
+      "Decisión posterior"
+    ]],
+
+    body:
+      feedbackData().map(
+        row =>
+          row.map(safeText)
+      ),
+
+    headStyles:{
+      fillColor:RED,
+      textColor:[255,255,255],
+      fontStyle:"bold",
+      fontSize:7.5
+    },
+
+    bodyStyles:{
+      fontSize:7.3,
+      cellPadding:2
+    }
+
+  });
+
+  /* =====================================
+     SÍNTESIS
+  ===================================== */
+
+  pdf.addPage();
+
+  header(
+    "9. Síntesis final del diseño AA2"
+  );
+
+  pdf.autoTable({
+
+    startY:44,
+
+    margin:{
+      left:14,
+      right:14
+    },
+
+    theme:"grid",
+
+    styles:{
+      fontSize:8.5,
+      cellPadding:3,
+      valign:"top"
+    },
+
+    columnStyles:{
+      0:{
+        cellWidth:95,
+        fontStyle:"bold",
+        fillColor:GRAY
+      }
+    },
+
+    body:[
+
+      [
+        "¿Qué cambia respecto a la evidencia diagnosticada en AA1?",
+        safeText(value("sintesis1"))
+      ],
+
+      [
+        "¿Por qué el nuevo diseño es más auténtico?",
+        safeText(value("sintesis2"))
+      ],
+
+      [
+        "¿Cómo se equilibra evaluación diagnóstica, formativa, sumativa y como aprendizaje?",
+        safeText(value("sintesis3"))
+      ],
+
+      [
+        "¿Qué decisiones pedagógicas se tomarán con los resultados?",
+        safeText(value("sintesis4"))
+      ],
+
+      [
+        "¿Qué cuidados éticos se aplicarán en el uso de IA/TIC?",
+        safeText(value("sintesis5"))
+      ]
+
+    ]
+
+  });
+
+  /* =====================================
+     DECLARACIÓN IA + FUENTES
+  ===================================== */
+
+  pdf.addPage();
+
+  header(
+    "Declaración de uso de IA y fuentes"
+  );
+
+  title(
+    "Declaración breve de uso de IA en AA2",
+    47
+  );
+
+  pdf.autoTable({
+
+    startY:52,
+
+    margin:{
+      left:14,
+      right:14
+    },
+
+    theme:"grid",
+
+    styles:{
+      fontSize:8.5,
+      cellPadding:3,
+      valign:"top"
+    },
+
+    columnStyles:{
+      0:{
+        cellWidth:65,
+        fontStyle:"bold",
+        fillColor:GRAY
+      }
+    },
+
+    body:[
+
+      [
+        "Herramientas utilizadas",
+        safeText(
+          value("iaDeclaracionHerramientas")
+        )
+      ],
+
+      [
+        "Propósito del uso",
+        safeText(
+          value("iaDeclaracionProposito")
+        )
+      ],
+
+      [
+        "Prompts o instrucciones",
+        safeText(
+          value("iaDeclaracionPrompts")
+        )
+      ]
+
+    ]
+
+  });
+
+  let sourceY =
+    pdf.lastAutoTable.finalY + 10;
+
+  title(
+    "Fuentes de apoyo para el formato",
+    sourceY
+  );
+
+  pdf.setFont(
+    "helvetica",
+    "normal"
+  );
+
+  pdf.setTextColor(
+    65,
+    58,
+    61
+  );
+
+  pdf.setFontSize(8.5);
+
+  const sourceLines = [
+
+    "• Material M1-S2 y 3: Estrategia de evaluación. Diseño inverso, definición de evidencias, tareas auténticas, técnicas e instrumentos.",
+
+    "• Trabajo Final: Kit de Evaluación del Curso. Ejemplo de articulación entre evidencia, tipo de tarea, técnica, instrumento y tipo de evaluación.",
+
+    "• Lineamiento SISE de uso de Inteligencia Artificial para docentes y estudiantes. Principios de transparencia, veracidad, privacidad, responsabilidad y supervisión humana."
 
   ];
 
-  items.forEach(item=>{
+  sourceY += 7;
 
-    if(y > 186){
-
-      pdf.addPage();
-
-      y = 18;
-
-    }
-
-    pdf.setFont(
-      "helvetica",
-      "bold"
-    );
-
-    pdf.setTextColor(
-      RED[0],
-      RED[1],
-      RED[2]
-    );
-
-    pdf.text(
-      item[0],
-      14,
-      y
-    );
-
-    pdf.setFont(
-      "helvetica",
-      "normal"
-    );
-
-    pdf.setTextColor(
-      60,
-      55,
-      57
-    );
+  sourceLines.forEach(source=>{
 
     const lines =
       pdf.splitTextToSize(
-        safeText(item[1]),
-        260
+        source,
+        265
       );
 
     pdf.text(
       lines,
       14,
-      y + 5
+      sourceY
     );
 
-    y +=
-      9 +
-      lines.length * 4;
+    sourceY +=
+      (lines.length * 4) + 4;
 
   });
+
+  /* =====================================
+     PIES
+  ===================================== */
 
   const pages =
     pdf.internal.getNumberOfPages();
@@ -3646,6 +4741,11 @@ function downloadPDF(){
   ){
 
     pdf.setPage(page);
+
+    pdf.setFont(
+      "helvetica",
+      "normal"
+    );
 
     pdf.setFontSize(7);
 
@@ -3673,7 +4773,7 @@ function downloadPDF(){
   }
 
   pdf.save(
-    "AA2_mapa_mix_evaluacion.pdf"
+    `AA2_mapa_mix_${fileName()}.pdf`
   );
 
   showStatus(
